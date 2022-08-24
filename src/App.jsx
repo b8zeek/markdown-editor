@@ -1,10 +1,21 @@
+import { useState } from 'react'
 import styled from 'styled-components'
+import axios from './axios'
 
 function App() {
+    const [userData, setUserData] = useState(null)
+
+    const getUserData = async () => {
+        const { data } = await axios.get('/users/bejzik8')
+
+        setUserData(data)
+    }
+
     return (
         <Container>
-            <Paragraph>Mirko Basic</Paragraph>
-            <Button>Get GitHub User</Button>
+            <Paragraph>Mirko Basic GitHub Data:</Paragraph>
+            <pre>{JSON.stringify(userData, null, 2)}</pre>
+            {!userData && <Button onClick={getUserData}>Get GitHub User</Button>}
         </Container>
     )
 }
@@ -20,7 +31,6 @@ const Container = styled.div`
 `
 
 const Paragraph = styled.p`
-    text-align: center;
     margin: 0;
 `
 
