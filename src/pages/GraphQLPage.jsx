@@ -1,9 +1,20 @@
+import { useState } from 'react'
 import styled from 'styled-components'
+import { useQuery } from '@apollo/client'
+
+import Pre from '../components/Pre'
+
+import { GET_USER } from '../graphql/queries'
 
 const GraphQLPage = () => {
+    const { data } = useQuery(GET_USER)
+
+    console.log(data)
+
     return (
         <Container>
             <h1>GraphQL Page</h1>
+            {data && <Pre>{JSON.stringify(data, null, 2)}</Pre>}
         </Container>
     )
 }
