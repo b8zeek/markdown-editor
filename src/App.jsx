@@ -1,13 +1,22 @@
 import styled from 'styled-components'
+import { Routes, Route, Link } from 'react-router-dom'
 
 import HomePage from './pages/HomePage'
 
 function App() {
     return (
         <Container>
-            <Header />
+            <Header>
+                <HeaderContent>
+                    <StyledLink to=''>Home</StyledLink>
+                    <StyledLink to='graphql'>Graph QL</StyledLink>
+                </HeaderContent>
+            </Header>
             <Content>
-                <HomePage />
+                <Routes>
+                    <Route path='' element={<HomePage />} />
+                    <Route path='graphgl' element={<HomePage />} />
+                </Routes>
             </Content>
         </Container>
     )
@@ -19,11 +28,36 @@ const Container = styled.div`
 
 const Header = styled.div`
     width: 100%;
-    height: 48px;
+    height: 24px;
     position: fixed;
-    background-color: rgba(255, 255, 255, 0.1);
     top: 0;
+    padding: 12px 0;
+    background-color: rgba(255, 255, 255, 0.1);
     margin: 0 auto;
+`
+
+const HeaderContent = styled.nav`
+    max-width: 1280px;
+    margin: 0 auto;
+`
+
+const StyledLink = styled(Link)`
+    display: inline-block;
+    vertical-align: top;
+    line-height: 24px;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
 `
 
 const Content = styled.div`
