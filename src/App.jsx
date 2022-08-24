@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Routes, Route, Link } from 'react-router-dom'
 
 import HomePage from './pages/HomePage'
+import GraphQLPage from './pages/GraphQLPage'
 
 function App() {
     return (
@@ -15,7 +16,7 @@ function App() {
             <Content>
                 <Routes>
                     <Route path='' element={<HomePage />} />
-                    <Route path='graphgl' element={<HomePage />} />
+                    <Route path='graphql' element={<GraphQLPage />} />
                 </Routes>
             </Content>
         </Container>
