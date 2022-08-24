@@ -1,0 +1,75 @@
+import { useState } from 'react'
+import styled from 'styled-components'
+import axios from '../axios'
+
+const HomePage = () => {
+    const [userData, setUserData] = useState(null)
+    const [userRepositories, setUserRepositories] = useState(null)
+
+    const getUserData = async () => {
+        const { data } = await axios.get('/user')
+
+        setUserData(data)
+    }
+
+    const getUserRepos = async () => {
+        const { data } = await axios.get('/user/repos')
+
+        setUserRepositories(data)
+    }
+
+    return (
+        <Container>
+            {userData ? (
+                <>
+                    <Heading>Authenticated GitHub User Data:</Heading>
+                    <StyledPre>{JSON.stringify(userData, null, 2)}</StyledPre>
+                </>
+            ) : (
+                <Button onClick={getUserData}>Get Authenticated GitHub User Data</Button>
+            )}
+            {userRepositories ? (
+                <>
+                    <Heading>Authenticated GitHub User Repos:</Heading>
+                    <StyledPre>{JSON.stringify(userRepositories, null, 2)}</StyledPre>
+                </>
+            ) : (
+                <Button onClick={getUserRepos}>Get Authenticated GitHub User Repos</Button>
+            )}
+        </Container>
+    )
+}
+
+const Container = styled.div`
+    width: 100%;
+`
+
+const Heading = styled.h1`
+    line-height: 32px;
+    font-size: 24px;
+    margin: 0;
+`
+
+const Button = styled.a`
+    display: inline-block;
+    vertical-align: top;
+    padding: 4px 20px;
+    border-radius: 5px;
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    align-self: start;
+    margin-bottom: 20px;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+`
+
+const StyledPre = styled.pre`
+    line-height: 16px;
+    font-size: 12px;
+    font-family: JetBrainsMono;
+`
+
+export default HomePage
