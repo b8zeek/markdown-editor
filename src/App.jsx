@@ -6,15 +6,15 @@ function App() {
     const [userData, setUserData] = useState(null)
 
     const getUserData = async () => {
-        const { data } = await axios.get('/users/bejzik8')
+        const { data } = await axios.get('/user')
 
         setUserData(data)
     }
 
     return (
         <Container>
-            <Paragraph>Mirko Basic GitHub Data:</Paragraph>
-            <pre>{JSON.stringify(userData, null, 2)}</pre>
+            <Paragraph>Authenticated GitHub User Data:</Paragraph>
+            <StyledPre>{JSON.stringify(userData, null, 2)}</StyledPre>
             {!userData && <Button onClick={getUserData}>Get GitHub User</Button>}
         </Container>
     )
@@ -47,6 +47,10 @@ const Button = styled.a`
     &:hover {
         background-color: rgba(255, 255, 255, 0.4);
     }
+`
+
+const StyledPre = styled.pre`
+    font-family: JetBrainsMono;
 `
 
 export default App
