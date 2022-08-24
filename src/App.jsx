@@ -4,6 +4,7 @@ import axios from './axios'
 
 function App() {
     const [userData, setUserData] = useState(null)
+    const [userRepositories, setUserRepositories] = useState(null)
 
     const getUserData = async () => {
         const { data } = await axios.get('/user')
@@ -11,11 +12,30 @@ function App() {
         setUserData(data)
     }
 
+    const getUserRepos = async () => {
+        const { data } = await axios.get('/user/repos')
+
+        setUserRepositories(data)
+    }
+
     return (
         <Container>
-            <Paragraph>Authenticated GitHub User Data:</Paragraph>
-            <StyledPre>{JSON.stringify(userData, null, 2)}</StyledPre>
-            {!userData && <Button onClick={getUserData}>Get GitHub User</Button>}
+            {userData ? (
+                <>
+                    <Heading>Authenticated GitHub User Data:</Heading>
+                    <StyledPre>{JSON.stringify(userData, null, 2)}</StyledPre>
+                </>
+            ) : (
+                <Button onClick={getUserData}>Get Authenticated GitHub User Data</Button>
+            )}
+            {userRepositories ? (
+                <>
+                    <Heading>Authenticated GitHub User Repos:</Heading>
+                    <StyledPre>{JSON.stringify(userRepositories, null, 2)}</StyledPre>
+                </>
+            ) : (
+                <Button onClick={getUserRepos}>Get Authenticated GitHub User Repos</Button>
+            )}
         </Container>
     )
 }
@@ -24,10 +44,15 @@ const Container = styled.div`
     width: 100%;
     max-width: 1280px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     padding: 20px 0;
     margin: 0 auto;
+`
+
+const Heading = styled.h1`
+    line-height: 32px;
+    font-size: 24px;
+    margin: 0;
 `
 
 const Paragraph = styled.p`
@@ -42,7 +67,8 @@ const Button = styled.a`
     user-select: none;
     background-color: rgba(255, 255, 255, 0.3);
     cursor: pointer;
-    align-self: center;
+    align-self: start;
+    margin-bottom: 20px;
 
     &:hover {
         background-color: rgba(255, 255, 255, 0.4);
@@ -50,6 +76,8 @@ const Button = styled.a`
 `
 
 const StyledPre = styled.pre`
+    line-height: 16px;
+    font-size: 12px;
     font-family: JetBrainsMono;
 `
 
