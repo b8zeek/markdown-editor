@@ -13,7 +13,12 @@ const HomePage = () => {
     }
 
     const getUserRepos = async () => {
-        const { data } = await axios.get('/user/repos')
+        const { data } = await axios.get('/user/repos', {
+            params: {
+                per_page: 100
+            }
+        })
+        console.log('REPOS DATA:', data)
 
         setUserRepositories(data)
     }
