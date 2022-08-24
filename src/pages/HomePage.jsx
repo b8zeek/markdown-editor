@@ -2,6 +2,8 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import axios from '../axios'
 
+import Pre from '../components/Pre'
+
 const HomePage = () => {
     const [userData, setUserData] = useState(null)
     const [userRepositories, setUserRepositories] = useState(null)
@@ -28,7 +30,7 @@ const HomePage = () => {
             {userData ? (
                 <>
                     <Heading>Authenticated GitHub User Data:</Heading>
-                    <StyledPre>{JSON.stringify(userData, null, 2)}</StyledPre>
+                    <Pre>{JSON.stringify(userData, null, 2)}</Pre>
                 </>
             ) : (
                 <Button onClick={getUserData}>Get Authenticated GitHub User Data</Button>
@@ -36,7 +38,7 @@ const HomePage = () => {
             {userRepositories ? (
                 <>
                     <Heading>Authenticated GitHub User Repos:</Heading>
-                    <StyledPre>{JSON.stringify(userRepositories, null, 2)}</StyledPre>
+                    <Pre>{JSON.stringify(userRepositories, null, 2)}</Pre>
                 </>
             ) : (
                 <Button onClick={getUserRepos}>Get Authenticated GitHub User Repos</Button>
@@ -71,12 +73,6 @@ const Button = styled.a`
     &:hover {
         background-color: rgba(255, 255, 255, 0.4);
     }
-`
-
-const StyledPre = styled.pre`
-    line-height: 16px;
-    font-size: 12px;
-    font-family: JetBrainsMono;
 `
 
 export default HomePage
