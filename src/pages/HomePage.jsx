@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import axios from '../axios'
 
-import Pre from '../components/Pre'
+import { Heading, Pre } from '../components'
 
 const HomePage = () => {
     const [userData, setUserData] = useState(null)
@@ -51,12 +51,6 @@ const Container = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-`
-
-const Heading = styled.h1`
-    line-height: 32px;
-    font-size: 24px;
-    margin: 0;
 `
 
 const Button = styled.a`
