@@ -113,7 +113,12 @@ const RepoItemContainer = styled.div`
     border: 1px solid #d0d7de;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
     margin-bottom: 20px;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
 `
 
 export default GraphQLPage
