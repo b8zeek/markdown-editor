@@ -6,9 +6,9 @@ import { Heading, Pre } from '../components'
 
 import { GET_USER, GET_USER_AND_REPOSITORIES } from '../graphql/queries'
 
-const RepoItem = ({ name, url, createdAt, updatedAt }) => {
+const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     return (
-        <RepoItemContainer>
+        <RepoItemContainer onClick={onClick}>
             <Paragraph bold marginBottom>
                 {name}
             </Paragraph>
@@ -20,8 +20,11 @@ const RepoItem = ({ name, url, createdAt, updatedAt }) => {
 }
 
 const GraphQLPage = () => {
+    const [selectedRepo, setSelectedRepo] = useState(null)
     // const { data: userData } = useQuery(GET_USER)
     const { data: repositoriesData } = useQuery(GET_USER_AND_REPOSITORIES)
+
+    const selectRepo = repo => setSelectedRepo(repo)
 
     return (
         <Container>
@@ -39,16 +42,36 @@ const GraphQLPage = () => {
                     </UserData>
                 )}
             </UserInfoContainer>
-            {repositoriesData && (
+            {selectedRepo ? (
+                <>
+                    <Heading>Selected Repo</Heading>
+                    <RepoItem
+                        key={selectedRepo.id}
+                        name={selectedRepo.name}
+                        url={selectedRepo.url}
+                        createdAt={selectedRepo.createdAt}
+                        updatedAt={selectedRepo.updatedAt}
+                    />
+                </>
+            ) : repositoriesData ? (
                 <>
                     <Heading>Repositories</Heading>
-                    {/* <Pre>{JSON.stringify(repositoriesData, null, 2)}</Pre> */}
                     <RepoContainer>
-                        {repositoriesData.viewer.repositories.nodes.map(({ id, name, url, createdAt, updatedAt }) => (
-                            <RepoItem key={id} name={name} url={url} createdAt={createdAt} updatedAt={updatedAt} />
+                        {repositoriesData.viewer.repositories.nodes.map(repo => (
+                            <RepoItem
+                                key={repo.id}
+                                name={repo.name}
+                                url={repo.url}
+                                createdAt={repo.createdAt}
+                                updatedAt={repo.updatedAt}
+                                onClick={selectRepo.bind(null, repo)}
+                            />
                         ))}
                     </RepoContainer>
+                    <Pre>{JSON.stringify(repositoriesData, null, 2)}</Pre>
                 </>
+            ) : (
+                <p>Fetching...</p>
             )}
         </Container>
     )
