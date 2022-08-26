@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { useQuery } from '@apollo/client'
+
+import { useRepositories } from '../hooks/useRepositories'
 
 import { Heading, Pre } from '../components'
-
-import { GET_USER, GET_USER_AND_REPOSITORIES, GET_REPOSITORY } from '../graphql/queries'
 
 const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     return (
@@ -21,16 +20,16 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
 
 const GraphQLPage = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
-    // const { data: userData } = useQuery(GET_USER)
-    const { data: repositoriesData } = useQuery(GET_USER_AND_REPOSITORIES)
-    const { data: repositoryData } = useQuery(GET_REPOSITORY, {
-        variables: {
-            owner: 'bejzik8',
-            name: 'documents'
-        }
-    })
 
-    console.log('REPOSITORY DATA:', repositoryData)
+    const repositoriesData = useRepositories()
+    // const { data: repositoryData } = useQuery(GET_REPOSITORY, {
+    //     variables: {
+    //         owner: 'bejzik8',
+    //         name: 'documents'
+    //     }
+    // })
+
+    console.log('REPOSITORIES DATA:', repositoriesData)
 
     const selectRepo = repo => setSelectedRepo(repo)
 
