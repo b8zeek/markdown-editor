@@ -38,6 +38,9 @@ export const GET_USER_AND_REPOSITORIES = gql`
                     updatedAt
                     url
                     visibility
+                    defaultBranchRef {
+                        name
+                    }
                 }
             }
         }
