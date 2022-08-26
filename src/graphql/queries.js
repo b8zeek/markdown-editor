@@ -43,3 +43,30 @@ export const GET_USER_AND_REPOSITORIES = gql`
         }
     }
 `
+
+export const GET_REPOSITORY = gql`
+    query GetRepository($owner: String!, $name: String!) {
+        repository(owner: $owner, name: $name) {
+            defaultBranchRef {
+                name
+                target {
+                    ... on Commit {
+                        commitSHA: oid
+                        tree {
+                            treeSHA: oid
+                            entries {
+                                name
+                                object {
+                                    ... on Blob {
+                                        blobSHA: oid
+                                        byteSize
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
