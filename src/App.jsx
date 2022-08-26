@@ -35,6 +35,7 @@ const Header = styled.div`
     top: 0;
     padding: 12px 0;
     background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
     margin: 0 auto;
 `
 
