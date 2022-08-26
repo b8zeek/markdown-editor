@@ -70,3 +70,20 @@ export const GET_REPOSITORY = gql`
         }
     }
 `
+
+export const GET_REPOSITORY_TREE = gql`
+    query GetRepositoryTree($name: String!, $owner: String!, $path: String!) {
+        repository(name: $name, owner: $owner) {
+            object(expression: $path) {
+                ... on Tree {
+                    entries {
+                        name
+                        type
+                        path
+                        size
+                    }
+                }
+            }
+        }
+    }
+`
