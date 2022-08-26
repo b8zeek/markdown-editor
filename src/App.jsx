@@ -25,6 +25,7 @@ function App() {
 
 const Container = styled.div`
     width: 100%;
+    overflow: hidden;
 `
 
 const Header = styled.div`
