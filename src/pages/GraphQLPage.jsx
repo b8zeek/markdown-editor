@@ -23,7 +23,7 @@ export const GraphQLPage = () => {
 
     const user = useUser()
     const repositories = useRepositories()
-    const repositoryTree = useRepositoryTree(user.login, selectedRepo?.name, `${selectedRepo?.defaultBranchRefName}:`)
+    const repositoryTree = useRepositoryTree(user.login, selectedRepo.name, `${selectedRepo.defaultBranchRefName}:`)
 
     console.log('USER:', user)
     console.log('REPOSITORIES:', repositories)
@@ -49,14 +49,26 @@ export const GraphQLPage = () => {
             </UserInfoContainer>
             {selectedRepo ? (
                 <>
-                    <Heading>Selected Repo</Heading>
-                    <RepoItem
-                        key={selectedRepo.id}
-                        name={selectedRepo.name}
-                        url={selectedRepo.url}
-                        createdAt={selectedRepo.createdAt}
-                        updatedAt={selectedRepo.updatedAt}
-                    />
+                    <Heading>{selectedRepo.name}</Heading>
+                    <FilesContainer>
+                        <FilesHeader>
+                            <RepoHeading>{selectedRepo.defaultBranchRefName}:</RepoHeading>
+                        </FilesHeader>
+                        <FilesTable>
+                            <FileItem>
+                                <FileText>mirko-basic.md</FileText>
+                            </FileItem>
+                            <FileItem>
+                                <FileText>mirko-basic.md</FileText>
+                            </FileItem>
+                            <FileItem>
+                                <FileText>mirko-basic.md</FileText>
+                            </FileItem>
+                            <FileItem>
+                                <FileText>mirko-basic.md</FileText>
+                            </FileItem>
+                        </FilesTable>
+                    </FilesContainer>
                 </>
             ) : repositories.length !== 0 ? (
                 <>
@@ -147,3 +159,46 @@ const RepoItemContainer = styled.div`
         background-color: rgba(255, 255, 255, 0.1);
     }
 `
+
+const FilesContainer = styled.div`
+    width: 100%;
+`
+
+const FilesHeader = styled.div`
+    padding: 16px;
+    border: 1px solid #30363d;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    background-color: #161b22;
+`
+
+const FilesTable = styled.div`
+    border: 1px solid #30363d;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+`
+
+const FileItem = styled.div`
+    padding: 8px 16px;
+    border-top: 1px solid #21262d;
+`
+
+const RepoHeading = styled.p`
+    line-height: 1.5;
+    font-size: 12px;
+    font-weight: bold;
+    color: #c9d1d9;
+    margin: 0;
+`
+
+const FileText = styled.a`
+    line-height: 1.5;
+    font-size: 12px;
+    color: #c9d1d9;
+    cursor: pointer;
+    margin: 0;
+`
+
+// app bg #0d1117
+// header bg #161b22
+// between border #21262d
