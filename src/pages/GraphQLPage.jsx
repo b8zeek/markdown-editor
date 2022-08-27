@@ -75,9 +75,11 @@ export const GraphQLPage = () => {
                                 </RepoHeading>
                             </FilesHeader>
                             <FilesTable>
-                                <FileItem>
-                                    <FolderUp onClick={folderUp}>. .</FolderUp>
-                                </FileItem>
+                                {currentPath.length !== 0 && (
+                                    <FileItem>
+                                        <FolderUp onClick={folderUp}>. .</FolderUp>
+                                    </FileItem>
+                                )}
                                 {repositoryTree.map(entry => (
                                     <FileItem key={entry.id}>
                                         <FileIcon src={entry.type === 'tree' ? folder : file} alt='123' />
