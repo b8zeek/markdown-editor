@@ -18,7 +18,7 @@ export const GET_REPOSITORIES = gql`
     query GetRepositories {
         repositories: viewer {
             id
-            repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {
+            repositories(first: 100, orderBy: { field: PUSHED_AT, direction: DESC }) {
                 totalCount
                 pageInfo {
                     startCursor
