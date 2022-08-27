@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-import { useRepositories, useRepositoryTree } from '../hooks'
+import { useUser, useRepositories, useRepositoryTree } from '../hooks'
 
-import { Heading, Pre } from '../components'
+import { Heading } from '../components'
 
 const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     return (
@@ -21,14 +21,12 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
 export const GraphQLPage = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
 
-    const userAndRepositoriesData = useRepositories()
-    const repositoryTree = useRepositoryTree(
-        userAndRepositoriesData?.user?.login,
-        selectedRepo?.name,
-        `${selectedRepo?.defaultBranchRefName}:`
-    )
+    const user = useUser()
+    const repositories = useRepositories()
+    const repositoryTree = useRepositoryTree(user.login, selectedRepo?.name, `${selectedRepo?.defaultBranchRefName}:`)
 
-    console.log('REPOSITORIES:', userAndRepositoriesData)
+    console.log('USER:', user)
+    console.log('REPOSITORIES:', repositories)
     console.log('REPOSITORY TREE:', repositoryTree)
 
     const selectRepo = repo => setSelectedRepo(repo)
@@ -37,15 +35,15 @@ export const GraphQLPage = () => {
         <Container>
             <UserInfoContainer>
                 <PageName>GraphQL Page</PageName>
-                {userAndRepositoriesData?.user && (
+                {user.login && (
                     <UserData>
                         <UserInfo>
                             <Paragraph bold marginBottom>
-                                {userAndRepositoriesData.user.name}
+                                {user.name}
                             </Paragraph>
-                            <Paragraph>{userAndRepositoriesData.user.bio}</Paragraph>
+                            <Paragraph>{user.bio}</Paragraph>
                         </UserInfo>
-                        <UserImage src={userAndRepositoriesData.user.avatarUrl} />
+                        <UserImage src={user.avatarUrl} />
                     </UserData>
                 )}
             </UserInfoContainer>
@@ -60,11 +58,11 @@ export const GraphQLPage = () => {
                         updatedAt={selectedRepo.updatedAt}
                     />
                 </>
-            ) : userAndRepositoriesData ? (
+            ) : repositories.length !== 0 ? (
                 <>
-                    <Heading>userAndRepositoriesData</Heading>
+                    <Heading>Repositories</Heading>
                     <RepoContainer>
-                        {userAndRepositoriesData?.repositories?.map(repo => (
+                        {repositories.map(repo => (
                             <RepoItem
                                 key={repo.id}
                                 name={repo.name}
@@ -72,11 +70,9 @@ export const GraphQLPage = () => {
                                 createdAt={repo.createdAt}
                                 updatedAt={repo.updatedAt}
                                 onClick={selectRepo.bind(null, repo)}
-                                // onClick={() => console.log(repo)}
                             />
                         ))}
                     </RepoContainer>
-                    <Pre>{JSON.stringify(userAndRepositoriesData, null, 2)}</Pre>
                 </>
             ) : (
                 <p>Fetching...</p>
