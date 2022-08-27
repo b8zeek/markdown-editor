@@ -39,7 +39,7 @@ export const GraphQLPage = () => {
 
     const selectRepo = repo => setSelectedRepo(repo)
     const setPath = path => setCurrentPath(path.split('/'))
-    const folderUp = () => setCurrentPath(currentPath => [...currentPath].splice(0, -1))
+    const folderUp = () => setCurrentPath(currentPath => [...currentPath].splice(0, currentPath.length - 1))
 
     return (
         <Container>
