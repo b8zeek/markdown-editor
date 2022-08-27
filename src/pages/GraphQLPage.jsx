@@ -5,6 +5,8 @@ import { useUser, useRepositories, useRepositoryTree } from '../hooks'
 
 import { Heading } from '../components'
 
+import folder from '../assets/svgs/folder.svg'
+
 const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     return (
         <RepoItemContainer onClick={onClick}>
@@ -66,6 +68,7 @@ export const GraphQLPage = () => {
                             <FilesTable>
                                 {repositoryTree.map(entry => (
                                     <FileItem>
+                                        <FileIcon src={folder} alt='123' />
                                         <FileText key={entry.name} onClick={setPath.bind(null, entry.path)}>
                                             {entry.name}
                                         </FileText>
@@ -184,6 +187,9 @@ const FilesTable = styled.div`
 `
 
 const FileItem = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     padding: 8px 16px;
     border-top: 1px solid #21262d;
 `
@@ -207,6 +213,10 @@ const FileText = styled.a`
         color: #58a6ff;
         text-decoration: underline;
     }
+`
+
+const FileIcon = styled.img`
+    margin-right: 16px;
 `
 
 // app bg #0d1117
