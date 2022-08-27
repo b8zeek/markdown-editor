@@ -20,16 +20,22 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
 
 export const GraphQLPage = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
+    const [currentPath, setCurrentPath] = useState('')
 
     const user = useUser()
     const repositories = useRepositories()
-    const repositoryTree = useRepositoryTree(user.login, selectedRepo?.name, `${selectedRepo?.defaultBranchRefName}:`)
+    const repositoryTree = useRepositoryTree(
+        user.login,
+        selectedRepo?.name,
+        `${selectedRepo?.defaultBranchRefName}:${currentPath}`
+    )
 
     console.log('USER:', user)
     console.log('REPOSITORIES:', repositories)
     console.log('REPOSITORY TREE:', repositoryTree)
 
     const selectRepo = repo => setSelectedRepo(repo)
+    const setPath = path => setCurrentPath(path)
 
     return (
         <Container>
@@ -53,12 +59,16 @@ export const GraphQLPage = () => {
                     {repositoryTree.length !== 0 && (
                         <FilesContainer>
                             <FilesHeader>
-                                <RepoHeading>{selectedRepo.defaultBranchRefName}:</RepoHeading>
+                                <RepoHeading>
+                                    {selectedRepo.defaultBranchRefName}:{currentPath}
+                                </RepoHeading>
                             </FilesHeader>
                             <FilesTable>
                                 {repositoryTree.map(entry => (
                                     <FileItem>
-                                        <FileText>{entry.name}</FileText>
+                                        <FileText key={entry.name} onClick={setPath.bind(null, entry.path)}>
+                                            {entry.name}
+                                        </FileText>
                                     </FileItem>
                                 ))}
                             </FilesTable>
@@ -192,6 +202,11 @@ const FileText = styled.a`
     color: #c9d1d9;
     cursor: pointer;
     margin: 0;
+
+    &:hover {
+        color: #58a6ff;
+        text-decoration: underline;
+    }
 `
 
 // app bg #0d1117
