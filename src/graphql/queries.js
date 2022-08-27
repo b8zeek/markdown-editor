@@ -1,8 +1,9 @@
 import { gql } from '@apollo/client'
 
-export const GET_USER_AND_REPOSITORIES = gql`
-    query GetUserAndRepositories {
+export const GET_USER = gql`
+    query GetUser {
         user: viewer {
+            id
             avatarUrl
             bio
             email
@@ -10,7 +11,13 @@ export const GET_USER_AND_REPOSITORIES = gql`
             name
             url
         }
+    }
+`
+
+export const GET_REPOSITORIES = gql`
+    query GetRepositories {
         repositories: viewer {
+            id
             repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {
                 totalCount
                 pageInfo {
