@@ -6,6 +6,7 @@ import { useUser, useRepositories, useRepositoryTree } from '../hooks'
 import { Heading } from '../components'
 
 import folder from '../assets/svgs/folder.svg'
+import file from '../assets/svgs/file.svg'
 
 const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     return (
@@ -67,11 +68,9 @@ export const GraphQLPage = () => {
                             </FilesHeader>
                             <FilesTable>
                                 {repositoryTree.map(entry => (
-                                    <FileItem>
-                                        <FileIcon src={folder} alt='123' />
-                                        <FileText key={entry.name} onClick={setPath.bind(null, entry.path)}>
-                                            {entry.name}
-                                        </FileText>
+                                    <FileItem key={entry.id}>
+                                        <FileIcon src={entry.type === 'tree' ? folder : file} alt='123' />
+                                        <FileText onClick={setPath.bind(null, entry.path)}>{entry.name}</FileText>
                                     </FileItem>
                                 ))}
                             </FilesTable>
