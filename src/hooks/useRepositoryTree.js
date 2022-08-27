@@ -7,7 +7,8 @@ export function useRepositoryTree(owner, name, path) {
             owner,
             name,
             path
-        }
+        },
+        skip: !owner || !name || !path
     })
 
     return data
