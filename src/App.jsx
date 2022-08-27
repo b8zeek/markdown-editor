@@ -39,7 +39,7 @@ const Header = styled.div`
 `
 
 const HeaderContent = styled.nav`
-    max-width: 1280px;
+    max-width: var(--application-max-width);
     margin: 0 auto;
 `
 
@@ -64,7 +64,7 @@ const StyledLink = styled(Link)`
 
 const Content = styled.div`
     width: 100%;
-    max-width: 1280px;
+    max-width: var(--application-max-width);
     display: flex;
     flex-direction: column;
     padding: 64px 0 20px;
