@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-import { useRepositories } from '../hooks/useRepositories'
+import { useRepositories, useRepositoryTree } from '../hooks'
 
 import { Heading, Pre } from '../components'
 
@@ -21,15 +21,15 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
 const GraphQLPage = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
 
-    const repositoriesData = useRepositories()
-    // const { data: repositoryData } = useQuery(GET_REPOSITORY, {
-    //     variables: {
-    //         owner: 'bejzik8',
-    //         name: 'documents'
-    //     }
-    // })
+    const repositories = useRepositories()
+    const repositoryTree = useRepositoryTree(
+        repositories?.viewer.login,
+        selectedRepo?.name,
+        `${selectedRepo?.defaultBranchRef.name}:`
+    )
 
-    console.log('REPOSITORIES DATA:', repositoriesData)
+    console.log('REPOSITORIES:', repositories)
+    console.log('REPOSITORY TREE:', repositoryTree)
 
     const selectRepo = repo => setSelectedRepo(repo)
 
@@ -37,15 +37,15 @@ const GraphQLPage = () => {
         <Container>
             <UserInfoContainer>
                 <PageName>GraphQL Page</PageName>
-                {repositoriesData?.viewer && (
+                {repositories?.viewer && (
                     <UserData>
                         <UserInfo>
                             <Paragraph bold marginBottom>
-                                {repositoriesData.viewer.name}
+                                {repositories.viewer.name}
                             </Paragraph>
-                            <Paragraph>{repositoriesData.viewer.bio}</Paragraph>
+                            <Paragraph>{repositories.viewer.bio}</Paragraph>
                         </UserInfo>
-                        <UserImage src={repositoriesData.viewer.avatarUrl} />
+                        <UserImage src={repositories.viewer.avatarUrl} />
                     </UserData>
                 )}
             </UserInfoContainer>
@@ -60,11 +60,11 @@ const GraphQLPage = () => {
                         updatedAt={selectedRepo.updatedAt}
                     />
                 </>
-            ) : repositoriesData ? (
+            ) : repositories ? (
                 <>
                     <Heading>Repositories</Heading>
                     <RepoContainer>
-                        {repositoriesData.viewer.repositories.nodes.map(repo => (
+                        {repositories.viewer.repositories.nodes.map(repo => (
                             <RepoItem
                                 key={repo.id}
                                 name={repo.name}
@@ -75,7 +75,7 @@ const GraphQLPage = () => {
                             />
                         ))}
                     </RepoContainer>
-                    <Pre>{JSON.stringify(repositoriesData, null, 2)}</Pre>
+                    <Pre>{JSON.stringify(repositories, null, 2)}</Pre>
                 </>
             ) : (
                 <p>Fetching...</p>
