@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-import { useUser, useRepositories, useRepositoryTree } from '../hooks'
+import { useUser, useRepositories, useRepositoryTree, useFile } from '../hooks'
 
 import { Heading } from '../components'
 
@@ -24,6 +24,7 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
 export const GraphQLPage = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
     const [currentPath, setCurrentPath] = useState([])
+    const [selectedFile, setSelectedFile] = useState('dxdao.md')
 
     const user = useUser()
     const repositories = useRepositories()
@@ -32,10 +33,12 @@ export const GraphQLPage = () => {
         selectedRepo?.name,
         `${selectedRepo?.defaultBranchRefName}:${currentPath.join('/')}`
     )
+    const fileContent = useFile(user.login, selectedRepo?.name, `${selectedRepo?.defaultBranchRefName}:${selectedFile}`)
 
     console.log('USER:', user)
     console.log('REPOSITORIES:', repositories)
     console.log('REPOSITORY TREE:', repositoryTree)
+    console.log('FILE CONTENT:', fileContent)
 
     const selectRepo = repo => setSelectedRepo(repo)
     const setPath = path => setCurrentPath(path.split('/'))
