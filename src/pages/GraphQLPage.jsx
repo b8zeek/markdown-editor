@@ -23,7 +23,7 @@ export const GraphQLPage = () => {
 
     const repositories = useRepositories()
     const repositoryTree = useRepositoryTree(
-        repositories?.viewer.login,
+        repositories?.user.login,
         selectedRepo?.name,
         `${selectedRepo?.defaultBranchRef.name}:`
     )
@@ -37,15 +37,15 @@ export const GraphQLPage = () => {
         <Container>
             <UserInfoContainer>
                 <PageName>GraphQL Page</PageName>
-                {repositories?.viewer && (
+                {repositories?.user && (
                     <UserData>
                         <UserInfo>
                             <Paragraph bold marginBottom>
-                                {repositories.viewer.name}
+                                {repositories.user.name}
                             </Paragraph>
-                            <Paragraph>{repositories.viewer.bio}</Paragraph>
+                            <Paragraph>{repositories.user.bio}</Paragraph>
                         </UserInfo>
-                        <UserImage src={repositories.viewer.avatarUrl} />
+                        <UserImage src={repositories.user.avatarUrl} />
                     </UserData>
                 )}
             </UserInfoContainer>
@@ -64,7 +64,7 @@ export const GraphQLPage = () => {
                 <>
                     <Heading>Repositories</Heading>
                     <RepoContainer>
-                        {repositories.viewer.repositories.nodes.map(repo => (
+                        {repositories.repositories.repositories.nodes.map(repo => (
                             <RepoItem
                                 key={repo.id}
                                 name={repo.name}
