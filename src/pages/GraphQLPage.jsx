@@ -41,6 +41,7 @@ export const GraphQLPage = () => {
     const setPath = path => setCurrentPath(path.split('/'))
     const toTheRootFolder = () => setCurrentPath([])
     const folderUp = () => setCurrentPath(currentPath => [...currentPath].splice(0, currentPath.length - 1))
+    const toFolder = index => setCurrentPath(currentPath => [...currentPath].splice(0, index + 1))
 
     return (
         <Container>
@@ -69,9 +70,9 @@ export const GraphQLPage = () => {
                                         {selectedRepo.defaultBranchRefName}
                                     </FolderSpan>
                                     <SlashSpan>/</SlashSpan>
-                                    {currentPath.map(folder => (
+                                    {currentPath.map((folder, index) => (
                                         <>
-                                            <FolderSpan>{folder}</FolderSpan>
+                                            <FolderSpan onClick={toFolder.bind(null, index)}>{folder}</FolderSpan>
                                             <SlashSpan>/</SlashSpan>
                                         </>
                                     ))}
