@@ -257,6 +257,8 @@ const FolderSpan = styled.span`
         `
         color: #58a6ff;
         cursor: pointer;
+
+        &:hover { text-decoration: underline; }
     `}
 `
 
