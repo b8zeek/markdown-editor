@@ -198,15 +198,14 @@ const FileItem = styled.div`
 
 const RepoHeading = styled.p`
     line-height: 1.5;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 14px;
     color: #c9d1d9;
     margin: 0;
 `
 
 const FileText = styled.a`
     line-height: 1.5;
-    font-size: 12px;
+    font-size: 14px;
     color: #c9d1d9;
     cursor: pointer;
     margin: 0;
@@ -225,7 +224,7 @@ const FolderUp = styled.a`
     display: block;
     width: 100%;
     line-height: 1.5;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: #58a6ff;
     cursor: pointer;
