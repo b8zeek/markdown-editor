@@ -39,6 +39,7 @@ export const GraphQLPage = () => {
 
     const selectRepo = repo => setSelectedRepo(repo)
     const setPath = path => setCurrentPath(path.split('/'))
+    const folderUp = () => setCurrentPath(currentPath => [...currentPath].splice(0, -1))
 
     return (
         <Container>
@@ -75,7 +76,7 @@ export const GraphQLPage = () => {
                             </FilesHeader>
                             <FilesTable>
                                 <FileItem>
-                                    <FolderUp>. .</FolderUp>
+                                    <FolderUp onClick={folderUp}>. .</FolderUp>
                                 </FileItem>
                                 {repositoryTree.map(entry => (
                                     <FileItem key={entry.id}>
