@@ -23,7 +23,7 @@ export const GraphQLPage = () => {
 
     const user = useUser()
     const repositories = useRepositories()
-    const repositoryTree = useRepositoryTree(user.login, selectedRepo.name, `${selectedRepo.defaultBranchRefName}:`)
+    const repositoryTree = useRepositoryTree(user.login, selectedRepo?.name, `${selectedRepo?.defaultBranchRefName}:`)
 
     console.log('USER:', user)
     console.log('REPOSITORIES:', repositories)
@@ -50,25 +50,20 @@ export const GraphQLPage = () => {
             {selectedRepo ? (
                 <>
                     <Heading>{selectedRepo.name}</Heading>
-                    <FilesContainer>
-                        <FilesHeader>
-                            <RepoHeading>{selectedRepo.defaultBranchRefName}:</RepoHeading>
-                        </FilesHeader>
-                        <FilesTable>
-                            <FileItem>
-                                <FileText>mirko-basic.md</FileText>
-                            </FileItem>
-                            <FileItem>
-                                <FileText>mirko-basic.md</FileText>
-                            </FileItem>
-                            <FileItem>
-                                <FileText>mirko-basic.md</FileText>
-                            </FileItem>
-                            <FileItem>
-                                <FileText>mirko-basic.md</FileText>
-                            </FileItem>
-                        </FilesTable>
-                    </FilesContainer>
+                    {repositoryTree.length !== 0 && (
+                        <FilesContainer>
+                            <FilesHeader>
+                                <RepoHeading>{selectedRepo.defaultBranchRefName}:</RepoHeading>
+                            </FilesHeader>
+                            <FilesTable>
+                                {repositoryTree.map(entry => (
+                                    <FileItem>
+                                        <FileText>{entry.name}</FileText>
+                                    </FileItem>
+                                ))}
+                            </FilesTable>
+                        </FilesContainer>
+                    )}
                 </>
             ) : repositories.length !== 0 ? (
                 <>
