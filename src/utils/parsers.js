@@ -9,5 +9,5 @@ export function parseRepositoriesData(data) {
 }
 
 export function parseTreeData(data) {
-    return data ? data.repository.object.entries.map(entry => new TreeEntry(entry)) : []
+    return data.repository.object.entries.map(entry => new TreeEntry(entry))
 }
