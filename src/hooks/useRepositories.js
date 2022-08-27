@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/client/react'
-import { GET_USER_AND_REPOSITORIES } from '../graphql'
+import { GET_REPOSITORIES } from '../graphql'
 
-import { parseUserAndRepositoriesData } from '../utils'
+import { parseRepositoriesData } from '../utils'
 
 export function useRepositories() {
-    const { data } = useQuery(GET_USER_AND_REPOSITORIES)
+    const { data } = useQuery(GET_REPOSITORIES)
 
-    return parseUserAndRepositoriesData(data)
+    return parseRepositoriesData(data)
 }
