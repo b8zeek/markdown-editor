@@ -49,6 +49,7 @@ export const GET_REPOSITORY_TREE = gql`
             object(expression: $path) {
                 ... on Tree {
                     entries {
+                        oid
                         name
                         type
                         path
