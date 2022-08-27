@@ -1,6 +1,5 @@
 export class User {
     constructor(data) {
-        console.log('PARS DATA', data)
         this.login = data?.login || ''
         this.email = data?.email || ''
         this.url = data?.url || ''

@@ -20,7 +20,6 @@ export const HomePage = () => {
                 per_page: 100
             }
         })
-        console.log('REPOS DATA:', data)
 
         setUserRepositories(data)
     }
