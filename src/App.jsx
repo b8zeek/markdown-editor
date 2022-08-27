@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 import { Routes, Route, Link } from 'react-router-dom'
 
-import HomePage from './pages/HomePage'
-import GraphQLPage from './pages/GraphQLPage'
+import { HomePage, GraphQLPage } from './pages'
 
 function App() {
     return (

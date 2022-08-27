@@ -18,7 +18,7 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     )
 }
 
-const GraphQLPage = () => {
+export const GraphQLPage = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
 
     const repositories = useRepositories()
@@ -150,5 +150,3 @@ const RepoItemContainer = styled.div`
         background-color: rgba(255, 255, 255, 0.1);
     }
 `
-
-export default GraphQLPage

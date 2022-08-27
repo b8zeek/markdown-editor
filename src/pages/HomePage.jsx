@@ -4,7 +4,7 @@ import axios from '../axios'
 
 import { Heading, Pre } from '../components'
 
-const HomePage = () => {
+export const HomePage = () => {
     const [userData, setUserData] = useState(null)
     const [userRepositories, setUserRepositories] = useState(null)
 
@@ -68,5 +68,3 @@ const Button = styled.a`
         background-color: rgba(255, 255, 255, 0.4);
     }
 `
-
-export default HomePage
