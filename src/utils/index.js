@@ -1,1 +1,1 @@
-export * from './parseUserAndRepositoriesData'
+export * from './parsers'
