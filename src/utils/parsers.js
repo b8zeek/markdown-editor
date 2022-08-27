@@ -1,4 +1,4 @@
-import { User, Repository, TreeEntry } from '../models'
+import { User, Repository, TreeEntry, File } from '../models'
 
 export function parseUserData(data) {
     return new User(data?.user)
@@ -10,4 +10,8 @@ export function parseRepositoriesData(data) {
 
 export function parseTreeData(data) {
     return data.repository.object.entries.map(entry => new TreeEntry(entry))
+}
+
+export function parseFileData(data) {
+    return data ? new File(data.repository.object) : null
 }
