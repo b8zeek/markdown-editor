@@ -44,8 +44,8 @@ export const GET_REPOSITORIES = gql`
 `
 
 export const GET_REPOSITORY_TREE = gql`
-    query GetRepositoryTree($name: String!, $owner: String!, $path: String!) {
-        repository(name: $name, owner: $owner) {
+    query GetRepositoryTree($owner: String!, $name: String!, $path: String!) {
+        repository(owner: $owner, name: $name) {
             object(expression: $path) {
                 ... on Tree {
                     entries {
@@ -55,6 +55,18 @@ export const GET_REPOSITORY_TREE = gql`
                         path
                         size
                     }
+                }
+            }
+        }
+    }
+`
+
+export const GET_FILE = gql`
+    query GetFile($owner: String!, $name: String!, $path: String!) {
+        repository(owner: $owner, name: $name) {
+            object(expression: $path) {
+                ... on Blob {
+                    text
                 }
             }
         }
