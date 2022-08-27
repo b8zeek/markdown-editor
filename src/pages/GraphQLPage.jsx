@@ -66,14 +66,14 @@ export const GraphQLPage = () => {
                         <FilesContainer>
                             <FilesHeader>
                                 <RepoHeading>
-                                    <FolderSpan colored onClick={toTheRootFolder}>
+                                    <FolderSpan clickable onClick={toTheRootFolder}>
                                         {selectedRepo.defaultBranchRefName}
                                     </FolderSpan>
                                     <SlashSpan>/</SlashSpan>
                                     {currentPath.map((folder, index) => (
                                         <>
                                             <FolderSpan
-                                                colored={currentPath.length > index + 1}
+                                                clickable={currentPath.length > index + 1}
                                                 onClick={toFolder.bind(null, index)}
                                             >
                                                 {folder}
@@ -246,15 +246,18 @@ const FolderUp = styled.a`
     font-size: 14px;
     font-weight: 600;
     color: #58a6ff;
-    cursor: pointer;
 `
 
 const FolderSpan = styled.span`
     font-weight: 600;
     color: #c9d1d9;
-    cursor: pointer;
 
-    ${({ colored }) => colored && 'color: #58a6ff;'}
+    ${({ clickable }) =>
+        clickable &&
+        `
+        color: #58a6ff;
+        cursor: pointer;
+    `}
 `
 
 const SlashSpan = styled.span`
