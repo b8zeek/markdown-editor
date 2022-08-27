@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client/react/hooks'
 
 import { GET_FILE } from '../graphql'
+import { parseFileData } from '../utils'
 
 export function useFile(owner, name, path) {
     const { data } = useQuery(GET_FILE, {
@@ -12,5 +13,5 @@ export function useFile(owner, name, path) {
         skip: !owner || !name || !path
     })
 
-    return data
+    return parseFileData(data)
 }
