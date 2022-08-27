@@ -253,6 +253,7 @@ const FolderUp = styled.a`
     font-size: 14px;
     font-weight: 600;
     color: #58a6ff;
+    cursor: pointer;
 `
 
 const FolderSpan = styled.span`
