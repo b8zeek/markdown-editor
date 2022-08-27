@@ -23,14 +23,14 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
 
 export const GraphQLPage = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
-    const [currentPath, setCurrentPath] = useState('')
+    const [currentPath, setCurrentPath] = useState([])
 
     const user = useUser()
     const repositories = useRepositories()
     const repositoryTree = useRepositoryTree(
         user.login,
         selectedRepo?.name,
-        `${selectedRepo?.defaultBranchRefName}:${currentPath}`
+        `${selectedRepo?.defaultBranchRefName}:${currentPath.join('/')}`
     )
 
     console.log('USER:', user)
@@ -38,7 +38,7 @@ export const GraphQLPage = () => {
     console.log('REPOSITORY TREE:', repositoryTree)
 
     const selectRepo = repo => setSelectedRepo(repo)
-    const setPath = path => setCurrentPath(path)
+    const setPath = path => setCurrentPath(path.split('/'))
 
     return (
         <Container>
@@ -63,7 +63,14 @@ export const GraphQLPage = () => {
                         <FilesContainer>
                             <FilesHeader>
                                 <RepoHeading>
-                                    {selectedRepo.defaultBranchRefName}:{currentPath}
+                                    <span>{selectedRepo.defaultBranchRefName}</span>
+                                    <span>/</span>
+                                    {currentPath.map(folder => (
+                                        <>
+                                            <span>{folder}</span>
+                                            <span>/</span>
+                                        </>
+                                    ))}
                                 </RepoHeading>
                             </FilesHeader>
                             <FilesTable>
