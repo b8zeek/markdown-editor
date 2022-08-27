@@ -74,7 +74,11 @@ export const GraphQLPage = () => {
                                         <>
                                             <FolderSpan
                                                 clickable={currentPath.length > index + 1}
-                                                onClick={toFolder.bind(null, index)}
+                                                onClick={
+                                                    currentPath.length > index + 1
+                                                        ? toFolder.bind(null, index)
+                                                        : undefined
+                                                }
                                             >
                                                 {folder}
                                             </FolderSpan>
