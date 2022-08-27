@@ -24,7 +24,7 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
 export const GraphQLPage = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
     const [currentPath, setCurrentPath] = useState([])
-    const [selectedFile, setSelectedFile] = useState('dxdao.md')
+    const [selectedFile, setSelectedFile] = useState('')
 
     const user = useUser()
     const repositories = useRepositories()
@@ -41,10 +41,10 @@ export const GraphQLPage = () => {
     console.log('FILE CONTENT:', fileContent)
 
     const selectRepo = repo => setSelectedRepo(repo)
-    const setPath = path => setCurrentPath(path.split('/'))
     const toTheRootFolder = () => setCurrentPath([])
     const folderUp = () => setCurrentPath(currentPath => [...currentPath].splice(0, currentPath.length - 1))
     const toFolder = index => setCurrentPath(currentPath => [...currentPath].splice(0, index + 1))
+    const openFileOrFolder = (type, path) => (type === 'tree' ? setCurrentPath(path.split('/')) : setSelectedFile(path))
 
     return (
         <Container>
@@ -102,7 +102,9 @@ export const GraphQLPage = () => {
                                 {repositoryTree.map(entry => (
                                     <FileItem key={entry.id}>
                                         <FileIcon src={entry.type === 'tree' ? folder : file} alt='123' />
-                                        <FileText onClick={setPath.bind(null, entry.path)}>{entry.name}</FileText>
+                                        <FileText onClick={() => openFileOrFolder(entry.type, entry.path)}>
+                                            {entry.name}
+                                        </FileText>
                                     </FileItem>
                                 ))}
                             </FilesTable>
