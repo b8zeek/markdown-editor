@@ -39,6 +39,7 @@ export const GraphQLPage = () => {
 
     const selectRepo = repo => setSelectedRepo(repo)
     const setPath = path => setCurrentPath(path.split('/'))
+    const toTheRootFolder = () => setCurrentPath([])
     const folderUp = () => setCurrentPath(currentPath => [...currentPath].splice(0, currentPath.length - 1))
 
     return (
@@ -64,12 +65,14 @@ export const GraphQLPage = () => {
                         <FilesContainer>
                             <FilesHeader>
                                 <RepoHeading>
-                                    <span>{selectedRepo.defaultBranchRefName}</span>
-                                    <span>/</span>
+                                    <FolderSpan onClick={toTheRootFolder}>
+                                        {selectedRepo.defaultBranchRefName}
+                                    </FolderSpan>
+                                    <SlashSpan>/</SlashSpan>
                                     {currentPath.map(folder => (
                                         <>
-                                            <span>{folder}</span>
-                                            <span>/</span>
+                                            <FolderSpan>{folder}</FolderSpan>
+                                            <SlashSpan>/</SlashSpan>
                                         </>
                                     ))}
                                 </RepoHeading>
@@ -238,6 +241,16 @@ const FolderUp = styled.a`
     font-weight: 600;
     color: #58a6ff;
     cursor: pointer;
+`
+
+const FolderSpan = styled.span`
+    font-weight: 600;
+    color: #58a6ff;
+    cursor: pointer;
+`
+
+const SlashSpan = styled.span`
+    margin: 0 4px;
 `
 
 // app bg #0d1117
