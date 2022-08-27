@@ -4,7 +4,7 @@ export function LoginPage() {
     return (
         <Container>
             <Input />
-            <Button>Authenticate</Button>
+            <Button disabled={false}>Authenticate</Button>
         </Container>
     )
 }
@@ -47,8 +47,14 @@ const Button = styled.button`
     padding: 3px 12px;
     cursor: pointer;
 
-    &:hover {
+    &:hover:enabled {
         background-color: #30363d;
         border-collapse: #8b949e;
+    }
+
+    &:disabled {
+        color: #8b949e;
+        border: 1px solid #21262d;
+        cursor: not-allowed;
     }
 `
