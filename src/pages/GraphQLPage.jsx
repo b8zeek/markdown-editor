@@ -154,7 +154,7 @@ const PageName = styled.h1`
 const UserData = styled.div`
     padding: 10px;
     border: 1px solid #d0d7de;
-    border-radius: 5px;
+    border-radius: 6px;
 `
 
 const UserInfo = styled.div`
@@ -191,7 +191,7 @@ const RepoItemContainer = styled.div`
     width: 20%;
     padding: 20px;
     border: 1px solid #d0d7de;
-    border-radius: 5px;
+    border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.2);
     cursor: pointer;
     margin-bottom: 20px;
@@ -209,14 +209,14 @@ const FilesHeader = styled.div`
     padding: 16px;
     border: 1px solid #30363d;
     border-bottom: none;
-    border-radius: 5px 5px 0 0;
+    border-radius: 6px 6px 0 0;
     background-color: #161b22;
 `
 
 const FilesTable = styled.div`
     border: 1px solid #30363d;
     border-top: none;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 6px 6px;
 `
 
 const FileItem = styled.div`
