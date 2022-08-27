@@ -67,6 +67,9 @@ export const GraphQLPage = () => {
                                 </RepoHeading>
                             </FilesHeader>
                             <FilesTable>
+                                <FileItem>
+                                    <FolderUp>. .</FolderUp>
+                                </FileItem>
                                 {repositoryTree.map(entry => (
                                     <FileItem key={entry.id}>
                                         <FileIcon src={entry.type === 'tree' ? folder : file} alt='123' />
@@ -216,6 +219,16 @@ const FileText = styled.a`
 
 const FileIcon = styled.img`
     margin-right: 16px;
+`
+
+const FolderUp = styled.a`
+    display: block;
+    width: 100%;
+    line-height: 1.5;
+    font-size: 12px;
+    font-weight: 600;
+    color: #58a6ff;
+    cursor: pointer;
 `
 
 // app bg #0d1117
