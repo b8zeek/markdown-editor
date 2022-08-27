@@ -4,7 +4,7 @@ import { GET_REPOSITORY_TREE } from '../graphql'
 import { parseTreeData } from '../utils'
 
 export function useRepositoryTree(owner, name, path) {
-    const { data } = useQuery(GET_REPOSITORY_TREE, {
+    const { data, previousData } = useQuery(GET_REPOSITORY_TREE, {
         variables: {
             owner,
             name,
@@ -13,5 +13,7 @@ export function useRepositoryTree(owner, name, path) {
         skip: !owner || !name || !path
     })
 
-    return parseTreeData(data)
+    if (data) return parseTreeData(data)
+    if (previousData) return parseTreeData(previousData)
+    return []
 }
