@@ -66,7 +66,10 @@ export const GraphQLPage = () => {
                         <FilesContainer>
                             <FilesHeader>
                                 <RepoHeading>
-                                    <FolderSpan clickable onClick={toTheRootFolder}>
+                                    <FolderSpan
+                                        clickable={currentPath.length !== 0}
+                                        onClick={currentPath.length !== 0 ? toTheRootFolder : undefined}
+                                    >
                                         {selectedRepo.defaultBranchRefName}
                                     </FolderSpan>
                                     <SlashSpan>/</SlashSpan>
