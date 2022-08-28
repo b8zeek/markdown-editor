@@ -10,12 +10,12 @@ import { AuthenticationGuard } from './guards'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <BrowserRouter>
+        <AuthenticationGuard>
             <ApolloProvider client={client}>
-                <AuthenticationGuard>
+                <BrowserRouter>
                     <App />
-                </AuthenticationGuard>
+                </BrowserRouter>
             </ApolloProvider>
-        </BrowserRouter>
+        </AuthenticationGuard>
     </React.StrictMode>
 )
