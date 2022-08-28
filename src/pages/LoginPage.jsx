@@ -1,10 +1,23 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 
-export function LoginPage() {
+export function LoginPage({ addNewToken }) {
+    const [newToken, enterNewToken] = useState('')
+
+    function handleSubmit(event) {
+        event.preventDefault()
+
+        addNewToken(newToken)
+    }
+
     return (
         <Container>
-            <Input />
-            <Button disabled={false}>Authenticate</Button>
+            <Form onSubmit={handleSubmit}>
+                <Input value={newToken} onChange={event => enterNewToken(event.target.value)} />
+                <Button type='submit' disabled={newToken.length === 0}>
+                    Authenticate
+                </Button>
+            </Form>
         </Container>
     )
 }
@@ -15,8 +28,14 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     margin: 0 auto;
+`
+
+const Form = styled.form`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 `
 
 const Input = styled.input`
