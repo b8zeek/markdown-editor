@@ -2,13 +2,15 @@ import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 
-export function Modal() {
+export function Modal({ text }) {
     const [modalContainer] = useState(() => document.createElement('div'))
+    const [value, setValue] = useState('')
 
     useEffect(() => {
         modalContainer.classList.add('modal-root')
         document.body.appendChild(modalContainer)
         document.body.style.overflow = 'hidden'
+        setValue(text)
 
         return () => {
             document.body.removeChild(modalContainer)
@@ -18,7 +20,7 @@ export function Modal() {
 
     return ReactDOM.createPortal(
         <MarkdownModal>
-            <Textarea />
+            <Textarea spellCheck={false} value={value} onChange={e => setValue(e.target.value)} />
         </MarkdownModal>,
         modalContainer
     )
@@ -40,7 +42,9 @@ const Textarea = styled.textarea`
     height: 100%;
     box-sizing: border-box;
     border: none;
+    color: rgba(255, 255, 255, 0.9);
     background-color: transparent;
+    font-family: JetBrainsMono;
     outline: none;
     resize: none;
 `
