@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { useUser, useRepositories, useRepositoryTree, useFile } from '../hooks'
 
-import { Heading } from '../components'
+import { Heading, Modal } from '../components'
 
 import folder from '../assets/svgs/folder.svg'
 import file from '../assets/svgs/file.svg'
@@ -25,6 +25,7 @@ export const GraphQLPage = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
     const [currentPath, setCurrentPath] = useState([])
     const [selectedFile, setSelectedFile] = useState('')
+    const [modal, setModal] = useState(true)
 
     const user = useUser()
     const repositories = useRepositories()
@@ -129,6 +130,11 @@ export const GraphQLPage = () => {
                 </>
             ) : (
                 <p>Fetching...</p>
+            )}
+            {modal && (
+                <Modal>
+                    <MarkdownModal></MarkdownModal>
+                </Modal>
             )}
         </Container>
     )
@@ -277,6 +283,15 @@ const FolderSpan = styled.span`
 
 const SlashSpan = styled.span`
     margin: 0 4px;
+`
+
+const MarkdownModal = styled.div`
+    min-height: 500px;
+    width: 100%;
+    max-width: 768px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
 `
 
 // app bg #0d1117
