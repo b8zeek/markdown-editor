@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { useUser, useRepositories, useRepositoryTree, useFile } from '../hooks'
 
-import { Heading, Modal, EditTextModal } from '../components'
+import { Heading, Modal } from '../components'
 
 import folder from '../assets/svgs/folder.svg'
 import file from '../assets/svgs/file.svg'
@@ -131,7 +131,7 @@ export const GraphQLPage = () => {
             ) : (
                 <p>Fetching...</p>
             )}
-            {true && <Modal />}
+            {fileContent?.text && <Modal text={fileContent.text} />}
         </Container>
     )
 }
