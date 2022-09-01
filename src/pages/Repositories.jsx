@@ -21,11 +21,10 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     )
 }
 
-export const GraphQLPage = () => {
+export const Repositories = () => {
     const [selectedRepo, setSelectedRepo] = useState(null)
     const [currentPath, setCurrentPath] = useState([])
     const [selectedFile, setSelectedFile] = useState('')
-    const [modal, setModal] = useState(true)
 
     const { data: user } = useUser()
     const repositories = useRepositories()
@@ -126,11 +125,6 @@ const Container = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-`
-
-const PageName = styled.h1`
-    display: inline-block;
-    margin: 0;
 `
 
 const Paragraph = styled.p`

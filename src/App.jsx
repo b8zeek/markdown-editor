@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Routes, Route } from 'react-router-dom'
 
 import { Header } from './components'
-import { GraphQLPage } from './pages'
+import { Repositories, Repository } from './pages'
 
 function App() {
     return (
@@ -10,7 +10,8 @@ function App() {
             <Header />
             <Content>
                 <Routes>
-                    <Route path='' element={<GraphQLPage />} />
+                    <Route path='' element={<Repositories />} />
+                    <Route path=':repository' element={<Repository />} />
                 </Routes>
             </Content>
         </Container>
