@@ -1,4 +1,4 @@
-import { useAtom } from 'jotai'
+import { useSetAtom } from 'jotai'
 import { useApolloClient } from '@apollo/client'
 
 import { personalAccessTokenAtom } from '../state'
@@ -8,10 +8,10 @@ import { useUser } from '../hooks'
 import { LoginPage } from '../pages'
 
 export function AuthenticationGuard({ children }) {
-    const [personalAccessToken, setPersonalAccessToken] = useAtom(personalAccessTokenAtom)
+    const setPersonalAccessToken = useSetAtom(personalAccessTokenAtom)
     const client = useApolloClient()
 
-    const { data, refetch } = useUser(personalAccessToken)
+    const { data, loading, refetch } = useUser()
 
     const addNewToken = token => {
         client.link.options.headers.Authorization = `bearer ${token}`
@@ -20,6 +20,8 @@ export function AuthenticationGuard({ children }) {
 
         refetch()
     }
+
+    if (loading) return
 
     return data.login ? children : <LoginPage addNewToken={addNewToken} />
 }
