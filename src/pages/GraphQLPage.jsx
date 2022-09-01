@@ -27,7 +27,7 @@ export const GraphQLPage = () => {
     const [selectedFile, setSelectedFile] = useState('')
     const [modal, setModal] = useState(true)
 
-    const user = useUser()
+    const { data: user } = useUser()
     const repositories = useRepositories()
     const repositoryTree = useRepositoryTree(
         user.login,
