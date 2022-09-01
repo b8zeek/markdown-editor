@@ -28,7 +28,7 @@ const Content = styled.div`
     max-width: var(--application-max-width);
     display: flex;
     flex-direction: column;
-    padding: 64px 0 20px;
+    padding: 84px 0 20px;
     margin: 0 auto;
 `
 

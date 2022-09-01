@@ -49,8 +49,6 @@ export const GraphQLPage = () => {
 
     return (
         <Container>
-            <PageName>GraphQL Page</PageName>
-
             {selectedRepo ? (
                 <>
                     <Heading>{selectedRepo.name}</Heading>
