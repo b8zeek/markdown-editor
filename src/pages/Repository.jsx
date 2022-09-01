@@ -29,6 +29,7 @@ export function Repository() {
     }, [])
 
     const selectedRepo = useAtomValue(selectedRepoAtom)
+    const closeFile = () => setSelectedFile('')
 
     const { data: user } = useUser()
     const repositoryTree = useRepositoryTree(user.login, repositoryName, `${branchName}:${currentPath.join('/')}`)
@@ -85,7 +86,7 @@ export function Repository() {
                     </FilesTable>
                 </FilesContainer>
             )}
-            {fileContent?.text && <Modal text={fileContent.text} />}
+            {fileContent?.text && <Modal text={fileContent.text} closeFile={closeFile} />}
         </Container>
     )
 }
