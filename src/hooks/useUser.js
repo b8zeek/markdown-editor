@@ -3,8 +3,10 @@ import { GET_USER } from '../graphql'
 
 import { parseUserData } from '../utils'
 
-export function useUser() {
-    const { data } = useQuery(GET_USER)
+export function useUser(personalAccessToken) {
+    const { data, refetch } = useQuery(GET_USER, {
+        skip: !personalAccessToken
+    })
 
-    return parseUserData(data)
+    return { data: parseUserData(data), refetch }
 }
