@@ -20,19 +20,38 @@ export function Modal({ text, closeFile }) {
 
     return ReactDOM.createPortal(
         <Backdrop onClick={closeFile}>
-            <MarkdownModal>
-                <Textarea spellCheck={false} value={value} onChange={e => setValue(e.target.value)} />
-            </MarkdownModal>
+            <Container>
+                <Title>markdown-editor.md</Title>
+                <MarkdownModal>
+                    <Textarea spellCheck={false} value={value} onChange={e => setValue(e.target.value)} />
+                </MarkdownModal>
+            </Container>
         </Backdrop>,
         modalContainer
     )
 }
 
+const Container = styled.div`
+    min-height: 500px;
+    height: 80vh;
+    width: 100%;
+    max-width: 768px;
+`
+
+const Title = styled.h1`
+    line-height: 40px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 0 20px;
+    margin: 0 0 10px;
+`
+
 const MarkdownModal = styled.div`
     min-height: 500px;
     height: 60vh;
-    width: 100%;
-    max-width: 768px;
+    width: calc(100% - 40px);
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
@@ -45,7 +64,7 @@ const Backdrop = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.3);
 `
 
 const Textarea = styled.textarea`
