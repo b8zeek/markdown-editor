@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useAtomValue } from 'jotai'
 import { useParams } from 'react-router-dom'
@@ -13,19 +13,26 @@ import folder from '../assets/svgs/folder.svg'
 import file from '../assets/svgs/file.svg'
 
 export function Repository() {
+    const [repositoryName, setRepositoryName] = useState('')
+    const [branchName, setBranchName] = useState('')
     const [currentPath, setCurrentPath] = useState([])
     const [selectedFile, setSelectedFile] = useState('')
 
     const params = useParams()
+    console.log(params)
+
+    useEffect(() => {
+        const [name, path] = params.repository.split('~')
+
+        setRepositoryName(name)
+        setBranchName(path)
+    }, [])
+
     const selectedRepo = useAtomValue(selectedRepoAtom)
 
     const { data: user } = useUser()
-    const repositoryTree = useRepositoryTree(
-        user.login,
-        selectedRepo?.name,
-        `${selectedRepo?.defaultBranchRefName}:${currentPath.join('/')}`
-    )
-    const fileContent = useFile(user.login, selectedRepo?.name, `${selectedRepo?.defaultBranchRefName}:${selectedFile}`)
+    const repositoryTree = useRepositoryTree(user.login, repositoryName, `${branchName}:${currentPath.join('/')}`)
+    const fileContent = useFile(user.login, repositoryName, `${branchName}:${selectedFile}`)
 
     const toTheRootFolder = () => setCurrentPath([])
     const folderUp = () => setCurrentPath(currentPath => [...currentPath].splice(0, currentPath.length - 1))
@@ -34,7 +41,7 @@ export function Repository() {
 
     return (
         <Container>
-            {selectedRepo && <Heading>{selectedRepo.name}</Heading>}
+            {repositoryName && <Heading>{repositoryName}</Heading>}
             {repositoryTree.length !== 0 && (
                 <FilesContainer>
                     <FilesHeader>
@@ -43,7 +50,7 @@ export function Repository() {
                                 clickable={currentPath.length !== 0}
                                 onClick={currentPath.length !== 0 ? toTheRootFolder : undefined}
                             >
-                                {selectedRepo.defaultBranchRefName}
+                                {branchName}
                             </FolderSpan>
                             <SlashSpan>/</SlashSpan>
                             {currentPath.map((folder, index) => (
