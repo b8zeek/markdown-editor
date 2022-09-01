@@ -32,7 +32,7 @@ export function Modal({ text, closeFile }) {
                     <Textarea spellCheck={false} value={value} onChange={e => setValue(e.target.value)} />
                 </MarkdownModal>
                 <Footer>
-                    <Input />
+                    <Input placeholder='Commit message...' />
                     <Button>Commit Changes</Button>
                 </Footer>
             </Container>
@@ -83,7 +83,9 @@ const Textarea = styled.textarea`
     border: none;
     color: rgba(255, 255, 255, 0.9);
     background-color: transparent;
+    line-height: 20px;
     font-family: JetBrainsMono;
+    font-size: 14px;
     outline: none;
     resize: none;
 `
@@ -103,6 +105,11 @@ const Input = styled.input`
     box-sizing: border-box;
     border-radius: 6px;
     border: none;
+    line-height: 20px;
+    font-family: JetBrainsMono;
+    font-size: 14px;
+    outline: none;
     background-color: rgba(255, 255, 255, 0.1);
+    padding: 4px 20px;
     margin-right: 15px;
 `
