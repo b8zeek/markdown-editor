@@ -11,7 +11,6 @@ export function Header() {
             <HeaderContent>
                 <Navigation>
                     <StyledLink to=''>Home</StyledLink>
-                    <StyledLink to='graphql'>Graph QL</StyledLink>
                 </Navigation>
                 <UserData>
                     <UserInfo>
