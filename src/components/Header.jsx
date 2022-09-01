@@ -5,8 +5,10 @@ export function Header() {
     return (
         <Container>
             <HeaderContent>
-                <StyledLink to=''>Home</StyledLink>
-                <StyledLink to='graphql'>Graph QL</StyledLink>
+                <Navigation>
+                    <StyledLink to=''>Home</StyledLink>
+                    <StyledLink to='graphql'>Graph QL</StyledLink>
+                </Navigation>
             </HeaderContent>
         </Container>
     )
@@ -14,7 +16,7 @@ export function Header() {
 
 const Container = styled.div`
     width: 100%;
-    height: 24px;
+    height: 40px;
     position: fixed;
     top: 0;
     padding: 12px 0;
@@ -23,9 +25,17 @@ const Container = styled.div`
     margin: 0 auto;
 `
 
-const HeaderContent = styled.nav`
+const HeaderContent = styled.div`
     max-width: var(--application-max-width);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0 auto;
+`
+
+const Navigation = styled.nav`
+    height: 24px;
 `
 
 const StyledLink = styled(Link)`
