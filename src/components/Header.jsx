@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import { useUser } from '../hooks'
+
 export function Header() {
+    const { data: user } = useUser()
+
     return (
         <Container>
             <HeaderContent>
@@ -9,6 +13,15 @@ export function Header() {
                     <StyledLink to=''>Home</StyledLink>
                     <StyledLink to='graphql'>Graph QL</StyledLink>
                 </Navigation>
+                <UserData>
+                    <UserInfo>
+                        <Paragraph bold marginBottom>
+                            {user.name}
+                        </Paragraph>
+                        <Paragraph>{user.bio}</Paragraph>
+                    </UserInfo>
+                    <UserImage src={user.avatarUrl} />
+                </UserData>
             </HeaderContent>
         </Container>
     )
@@ -55,4 +68,31 @@ const StyledLink = styled(Link)`
     &:hover {
         background-color: rgba(0, 0, 0, 0.2);
     }
+`
+
+const UserData = styled.div`
+    display: inline-flex;
+    align-items: center;
+`
+
+const UserInfo = styled.div`
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+`
+
+const Paragraph = styled.p`
+    line-height: 12px;
+    font-size: 12px;
+    text-align: right;
+    margin: 0;
+
+    ${({ bold }) => bold && 'font-weight: 800;'}
+    ${({ marginBottom }) => marginBottom && 'margin-bottom: 8px;'}
+`
+
+const UserImage = styled.img`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 `
