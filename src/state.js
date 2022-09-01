@@ -1,4 +1,5 @@
-import { atomWithStorage, atom } from 'jotai/utils'
+import { atom } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
 import { atomWithStore } from 'jotai/zustand'
 import create from 'zustand/vanilla'
 
