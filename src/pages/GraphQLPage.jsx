@@ -49,20 +49,8 @@ export const GraphQLPage = () => {
 
     return (
         <Container>
-            <UserInfoContainer>
-                <PageName>GraphQL Page</PageName>
-                {user.login && (
-                    <UserData>
-                        <UserInfo>
-                            <Paragraph bold marginBottom>
-                                {user.name}
-                            </Paragraph>
-                            <Paragraph>{user.bio}</Paragraph>
-                        </UserInfo>
-                        <UserImage src={user.avatarUrl} />
-                    </UserData>
-                )}
-            </UserInfoContainer>
+            <PageName>GraphQL Page</PageName>
+
             {selectedRepo ? (
                 <>
                     <Heading>{selectedRepo.name}</Heading>
@@ -142,27 +130,9 @@ const Container = styled.div`
     flex-direction: column;
 `
 
-const UserInfoContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-`
-
 const PageName = styled.h1`
     display: inline-block;
     margin: 0;
-`
-
-const UserData = styled.div`
-    padding: 10px;
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
-`
-
-const UserInfo = styled.div`
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 20px;
 `
 
 const Paragraph = styled.p`
@@ -172,12 +142,6 @@ const Paragraph = styled.p`
 
     ${({ bold }) => bold && 'font-weight: 800;'}
     ${({ marginBottom }) => marginBottom && 'margin-bottom: 8px;'}
-`
-
-const UserImage = styled.img`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
 `
 
 const RepoContainer = styled.div`
