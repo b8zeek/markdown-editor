@@ -31,7 +31,7 @@ export const Repositories = () => {
 
     const selectRepo = repo => {
         setSelectedRepo(repo)
-        navigate(`/${repo.name}`)
+        navigate(`/${repo.name}~${repo.defaultBranchRefName}`)
     }
 
     return (
@@ -96,7 +96,3 @@ const RepoItemContainer = styled.div`
         background-color: rgba(255, 255, 255, 0.1);
     }
 `
-
-// app bg #0d1117
-// header bg #161b22
-// between border #21262d
