@@ -20,8 +20,12 @@ export function Modal({ text, closeFile }) {
         }
     }, [])
 
+    const handleCloseFile = event => {
+        if (event.target == event.currentTarget) closeFile()
+    }
+
     return ReactDOM.createPortal(
-        <Backdrop onClick={closeFile}>
+        <Backdrop onClick={handleCloseFile}>
             <Container>
                 <Title>markdown-editor.md</Title>
                 <MarkdownModal>
