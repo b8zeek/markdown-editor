@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { useAtomValue } from 'jotai'
 import { useParams } from 'react-router-dom'
-
-import { selectedRepoAtom } from '../state'
 
 import { useUser, useRepositoryTree, useFile } from '../hooks'
 
@@ -19,7 +16,6 @@ export function Repository() {
     const [selectedFile, setSelectedFile] = useState('')
 
     const params = useParams()
-    console.log(params)
 
     useEffect(() => {
         const [name, path] = params.repository.split('~')
@@ -28,7 +24,6 @@ export function Repository() {
         setBranchName(path)
     }, [])
 
-    const selectedRepo = useAtomValue(selectedRepoAtom)
     const closeFile = () => setSelectedFile('')
 
     const { data: user } = useUser()

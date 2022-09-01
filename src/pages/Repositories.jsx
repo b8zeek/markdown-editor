@@ -1,8 +1,5 @@
-import { useSetAtom } from 'jotai'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-
-import { selectedRepoAtom } from '../state'
 
 import { useRepositories } from '../hooks'
 
@@ -22,17 +19,13 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
 }
 
 export const Repositories = () => {
-    const setSelectedRepo = useSetAtom(selectedRepoAtom)
     const navigate = useNavigate()
 
     const repositories = useRepositories()
 
     console.log('REPOSITORIES:', repositories)
 
-    const selectRepo = repo => {
-        setSelectedRepo(repo)
-        navigate(`/${repo.name}~${repo.defaultBranchRefName}`)
-    }
+    const selectRepo = repo => navigate(`/${repo.name}~${repo.defaultBranchRefName}`)
 
     return (
         <Container>
