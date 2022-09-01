@@ -1,3 +1,4 @@
 export * from './LoginPage'
 export * from './HomePage'
-export * from './GraphQLPage'
+export * from './Repositories'
+export * from './Repository'
