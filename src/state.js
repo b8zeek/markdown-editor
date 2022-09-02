@@ -1,4 +1,3 @@
-import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 import { atomWithStore } from 'jotai/zustand'
 import create from 'zustand/vanilla'
@@ -13,5 +12,3 @@ export const personalAccessTokenAtom = atomWithStorage(
 // })
 
 // const storeAtom = atomWithStore(store)
-
-export const selectedRepoAtom = atom(null)
