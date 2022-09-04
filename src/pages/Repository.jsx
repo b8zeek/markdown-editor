@@ -27,7 +27,7 @@ export function Repository() {
     const closeFile = () => setSelectedFile('')
 
     const { data: user } = useUser()
-    const { repositoryTree, oid } = useRepositoryTree(
+    const { repositoryTree } = useRepositoryTree(
         user.login,
         repositoryName,
         `${branchName}:${currentPath.join('/')}`

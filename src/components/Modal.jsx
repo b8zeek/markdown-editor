@@ -21,7 +21,7 @@ export function Modal({ text, closeFile }) {
     }, [])
 
     const handleCloseFile = event => {
-        if (event.target == event.currentTarget) closeFile()
+        if (event.target === event.currentTarget) closeFile()
     }
 
     return createPortal(
