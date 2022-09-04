@@ -15,5 +15,5 @@ export function useRepositoryTree(owner, name, path) {
 
     if (data) return parseTreeData(data)
     if (previousData) return parseTreeData(previousData)
-    return []
+    return { repositoryTree: [], oid: '' }
 }
