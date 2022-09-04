@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom'
+import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 
@@ -24,7 +24,7 @@ export function Modal({ text, closeFile }) {
         if (event.target == event.currentTarget) closeFile()
     }
 
-    return ReactDOM.createPortal(
+    return createPortal(
         <Backdrop onClick={handleCloseFile}>
             <Container>
                 <Title>markdown-editor.md</Title>

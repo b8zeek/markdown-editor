@@ -9,7 +9,10 @@ export function parseRepositoriesData(data) {
 }
 
 export function parseTreeData(data) {
-    return data.repository.object.entries.map(entry => new TreeEntry(entry))
+    return {
+        repositoryTree: data.repository.object.entries.map(entry => new TreeEntry(entry)),
+        oid: data.oid.defaultBranchRef.target.history.nodes[0].oid
+    }
 }
 
 export function parseFileData(data) {
