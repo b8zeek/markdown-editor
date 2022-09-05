@@ -4,13 +4,13 @@ import folder from '../../assets/svgs/folder.svg'
 import file from '../../assets/svgs/file.svg'
 
 export const FilesTable = ({
-    toTheRootFolder,
-    currentPath,
     branchName,
-    folderUp,
-    toFolder,
+    currentPath,
     repositoryTree,
-    openFileOrFolder
+    openFileOrFolder,
+    toFolder,
+    folderUp,
+    toTheRootFolder
 }) => (
     <FilesContainer>
         <FilesHeader>

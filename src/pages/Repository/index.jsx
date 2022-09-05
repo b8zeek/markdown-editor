@@ -17,7 +17,6 @@ export function Repository() {
 
     useEffect(() => {
         const [name, path] = params.repository.split('~')
-        console.log(path)
 
         setRepositoryName(name)
         setBranchName(path)
@@ -38,13 +37,13 @@ export function Repository() {
             {repositoryName && <Heading>{repositoryName}</Heading>}
             {repositoryTree.length !== 0 && (
                 <FilesTable
-                    toTheRootFolder={toTheRootFolder}
-                    currentPath={currentPath}
                     branchName={branchName}
-                    folderUp={folderUp}
-                    toFolder={toFolder}
+                    currentPath={currentPath}
                     repositoryTree={repositoryTree}
                     openFileOrFolder={openFileOrFolder}
+                    toFolder={toFolder}
+                    folderUp={folderUp}
+                    toTheRootFolder={toTheRootFolder}
                 />
             )}
             {fileContent?.text && <Modal text={fileContent.text} closeFile={closeFile} />}
