@@ -26,13 +26,8 @@ export function Repository() {
 
     const closeFile = () => setSelectedFile('')
 
-    const { data: user } = useUser()
-    const { repositoryTree } = useRepositoryTree(
-        user.login,
-        repositoryName,
-        `${branchName}:${currentPath.join('/')}`
-    )
-    const fileContent = useFile(user.login, repositoryName, `${branchName}:${selectedFile}`)
+    const { repositoryTree, oid } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
+    const fileContent = useFile(repositoryName, `${branchName}:${selectedFile}`)
 
     const toTheRootFolder = () => setCurrentPath([])
     const folderUp = () => setCurrentPath(currentPath => [...currentPath].splice(0, currentPath.length - 1))
