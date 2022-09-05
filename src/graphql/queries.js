@@ -47,6 +47,7 @@ export const GET_REPOSITORY_TREE = gql`
     query GetRepositoryTree($owner: String!, $name: String!, $path: String!) {
         repository: repository(owner: $owner, name: $name) {
             object(expression: $path) {
+                id
                 ... on Tree {
                     entries {
                         oid
@@ -58,6 +59,7 @@ export const GET_REPOSITORY_TREE = gql`
                 }
             }
         }
+
         oid: repository(owner: $owner, name: $name) {
             defaultBranchRef {
                 target {
