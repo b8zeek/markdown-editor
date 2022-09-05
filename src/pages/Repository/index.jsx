@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
+
+import { useAtomValue } from 'jotai'
+import { repoStoreAtom } from '../../state'
 
 import { useRepositoryTree, useFile } from '../../hooks'
 
@@ -8,10 +11,16 @@ import { Heading, Modal } from '../../components'
 import { FilesTable } from './FilesTable'
 
 export function Repository() {
-    const [repositoryName, setRepositoryName] = useState('')
-    const [branchName, setBranchName] = useState('')
-    const [currentPath, setCurrentPath] = useState([])
-    const [selectedFile, setSelectedFile] = useState('')
+    const {
+        repositoryName,
+        setRepositoryName,
+        branchName,
+        setBranchName,
+        currentPath,
+        setCurrentPath,
+        selectedFile,
+        setSelectedFile
+    } = useAtomValue(repoStoreAtom)
 
     const params = useParams()
 
