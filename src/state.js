@@ -7,15 +7,20 @@ export const personalAccessTokenAtom = atomWithStorage(
     localStorage.getItem('personal-access-token')
 )
 
-const repoStore = create(set => ({
+const initRepoState = {
     repositoryName: '',
-    setRepositoryName: v => set({ repositoryName: v }),
     branchName: '',
-    setBranchName: v => set({ branchName: v }),
     currentPath: [],
+    selectedFile: ''
+}
+
+const repoStore = create(set => ({
+    ...initRepoState,
+    setRepositoryName: v => set({ repositoryName: v }),
+    setBranchName: v => set({ branchName: v }),
     setCurrentPath: v => set({ currentPath: v }),
-    selectedFile: '',
-    setSelectedFile: v => set({ selectedFile: v })
+    setSelectedFile: v => set({ selectedFile: v }),
+    resetRepoState: () => set({ ...initRepoState })
 }))
 
 export const repoStoreAtom = atomWithStore(repoStore)
