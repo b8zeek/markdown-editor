@@ -5,41 +5,31 @@ import { useParams } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
 import { repoStoreAtom } from '../../state'
 
+import { useRepoService } from '../../services/useRepoService'
+
 import { useRepositoryTree, useFile } from '../../hooks'
 
 import { Heading, Modal } from '../../components'
 import { FilesTable } from './FilesTable'
 
 export function Repository() {
-    const {
-        repositoryName,
-        setRepositoryName,
-        branchName,
-        setBranchName,
-        currentPath,
-        setCurrentPath,
-        selectedFile,
-        setSelectedFile
-    } = useAtomValue(repoStoreAtom)
+    const { repositoryName, setRepositoryName, branchName, setBranchName, currentPath, selectedFile, resetRepoState } =
+        useAtomValue(repoStoreAtom)
+
+    const { openFileOrFolder, toFolder, folderUp, toTheRootFolder, closeFile } = useRepoService()
 
     const params = useParams()
 
     useEffect(() => {
         const [name, path] = params.repository.split('~')
 
+        resetRepoState()
         setRepositoryName(name)
         setBranchName(path)
     }, [])
 
-    const closeFile = () => setSelectedFile('')
-
     const { repositoryTree, oid } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
     const fileContent = useFile(repositoryName, `${branchName}:${selectedFile}`)
-
-    const toTheRootFolder = () => setCurrentPath([])
-    const folderUp = () => setCurrentPath(currentPath => [...currentPath].splice(0, currentPath.length - 1))
-    const toFolder = index => setCurrentPath(currentPath => [...currentPath].splice(0, index + 1))
-    const openFileOrFolder = (type, path) => (type === 'tree' ? setCurrentPath(path.split('/')) : setSelectedFile(path))
 
     return (
         <Container>
