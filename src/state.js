@@ -1,6 +1,9 @@
+import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 import create from 'zustand/vanilla'
 import { atomWithStore } from 'jotai/zustand'
+
+export const showSpinnerAtom = atom(false)
 
 export const personalAccessTokenAtom = atomWithStorage(
     'personal-access-token',
