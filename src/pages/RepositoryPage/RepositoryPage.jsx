@@ -13,7 +13,7 @@ import { Heading } from '@components'
 import { Modal } from './Modal'
 import { FilesTable } from './FilesTable'
 
-export function Repository() {
+export function RepositoryPage() {
     const { repositoryName, setRepositoryName, branchName, setBranchName, currentPath, selectedFile, resetRepoState } =
         useAtomValue(repoStoreAtom)
 

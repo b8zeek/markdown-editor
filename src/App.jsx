@@ -5,7 +5,7 @@ import { useAtomValue } from 'jotai'
 import { showSpinnerAtom } from '@/state'
 
 import { Spinner, Header } from './components'
-import { Repositories, Repository } from './pages'
+import { RepositoriesPage, RepositoryPage } from './pages'
 
 function App() {
     const showSpinner = useAtomValue(showSpinnerAtom)
@@ -15,8 +15,8 @@ function App() {
             <Header />
             <Content>
                 <Routes>
-                    <Route path='' element={<Repositories />} />
-                    <Route path=':repository' element={<Repository />} />
+                    <Route path='' element={<RepositoriesPage />} />
+                    <Route path=':repository' element={<RepositoryPage />} />
                 </Routes>
             </Content>
             {showSpinner && <Spinner />}

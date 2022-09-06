@@ -18,7 +18,7 @@ const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     )
 }
 
-export const Repositories = () => {
+export function RepositoriesPage() {
     const navigate = useNavigate()
 
     const repositories = useRepositories()
