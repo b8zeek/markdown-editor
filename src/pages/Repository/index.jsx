@@ -9,14 +9,15 @@ import { useRepoService } from '../../services/useRepoService'
 
 import { useRepositoryTree, useFile } from '../../hooks'
 
-import { Heading, Modal } from '../../components'
+import { Heading } from '../../components'
+import { Modal } from './Modal'
 import { FilesTable } from './FilesTable'
 
 export function Repository() {
     const { repositoryName, setRepositoryName, branchName, setBranchName, currentPath, selectedFile, resetRepoState } =
         useAtomValue(repoStoreAtom)
 
-    const { openFileOrFolder, toFolder, folderUp, toTheRootFolder, closeFile } = useRepoService()
+    const { openFileOrFolder, toFolder, folderUp, toTheRootFolder } = useRepoService()
 
     const params = useParams()
 
@@ -29,7 +30,7 @@ export function Repository() {
     }, [])
 
     const { repositoryTree, oid } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
-    const fileContent = useFile(repositoryName, `${branchName}:${selectedFile}`)
+    const file = useFile(repositoryName, `${branchName}:${selectedFile}`)
 
     return (
         <Container>
@@ -45,15 +46,7 @@ export function Repository() {
                     toTheRootFolder={toTheRootFolder}
                 />
             )}
-            {fileContent?.text && (
-                <Modal
-                    text={fileContent.text}
-                    fileContent={fileContent}
-                    closeFile={closeFile}
-                    currentPath={currentPath}
-                    oid={oid}
-                />
-            )}
+            {file?.text && <Modal fileContent={file.text} oid={oid} />}
         </Container>
     )
 }

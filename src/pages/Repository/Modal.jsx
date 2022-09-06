@@ -2,14 +2,18 @@ import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 
-import { useCommit } from '../hooks'
+import { useRepoService } from '../../services/useRepoService'
 
-import { Button } from './Button'
+import { useCommit } from '../../hooks'
 
-export function Modal({ text, closeFile, oid }) {
+import { Button } from '../../components/Button'
+
+export function Modal({ fileContent, oid }) {
     const [modalContainer] = useState(() => document.createElement('div'))
     const [value, setValue] = useState('')
     const [commitMessage, setCommitMessage] = useState('')
+
+    const { closeFile } = useRepoService()
 
     const commitHandler = useCommit(value, commitMessage, oid)
 
@@ -17,7 +21,8 @@ export function Modal({ text, closeFile, oid }) {
         modalContainer.classList.add('modal-root')
         document.body.appendChild(modalContainer)
         document.body.style.overflow = 'hidden'
-        setValue(text)
+
+        setValue(fileContent)
 
         return () => {
             document.body.removeChild(modalContainer)
@@ -25,11 +30,7 @@ export function Modal({ text, closeFile, oid }) {
         }
     }, [])
 
-    const onChangeHandler = event => {
-        setValue(event.target.value)
-        console.log('BASE64:', btoa(event.target.value))
-    }
-
+    const onChangeHandler = event => setValue(event.target.value)
     const handleCloseFile = event => {
         if (event.target === event.currentTarget) closeFile()
     }

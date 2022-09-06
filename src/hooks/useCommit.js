@@ -17,10 +17,7 @@ export const useCommit = (text, commitMessage, oid) => {
 
     const commitChanges = useMutation(COMMIT)[0]
 
-    console.log(currentPath)
-
     const commitHandler = async () => {
-        console.log('COMMIT HANDLER EXECUTED...')
         try {
             const result = await commitChanges({
                 variables: {
