@@ -1,10 +1,15 @@
 import styled from 'styled-components'
 import { Routes, Route } from 'react-router-dom'
 
-import { Header } from './components'
+import { useAtomValue } from 'jotai'
+import { showSpinnerAtom } from '@/state'
+
+import { Spinner, Header } from './components'
 import { Repositories, Repository } from './pages'
 
 function App() {
+    const showSpinner = useAtomValue(showSpinnerAtom)
+
     return (
         <Container>
             <Header />
@@ -14,6 +19,7 @@ function App() {
                     <Route path=':repository' element={<Repository />} />
                 </Routes>
             </Content>
+            {showSpinner && <Spinner />}
         </Container>
     )
 }
