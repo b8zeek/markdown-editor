@@ -1,8 +1,8 @@
 import { useApolloClient } from '@apollo/client'
 import { useQuery } from '@apollo/client/react/hooks'
 
-import { GET_USER, GET_REPOSITORY_TREE } from '../graphql'
-import { parseTreeData } from '../utils'
+import { GET_USER, GET_REPOSITORY_TREE } from '@graphql'
+import { parseTreeData } from '@utils'
 
 export function useRepositoryTree(name, path) {
     const client = useApolloClient()

@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 
-import { useRepoService } from '../../services/useRepoService'
+import { useRepoService } from '@services/useRepoService'
 
-import { useCommit } from '../../hooks'
+import { useCommit } from '@hooks'
 
-import { Button } from '../../components/Button'
+import { Button } from '@components/Button'
 
 export function Modal({ fileContent, oid }) {
     const [modalContainer] = useState(() => document.createElement('div'))

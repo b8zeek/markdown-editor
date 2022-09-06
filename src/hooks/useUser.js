@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client/react'
-import { GET_USER } from '../graphql'
 import { useAtomValue } from 'jotai'
-import { personalAccessTokenAtom } from '../state'
+import { personalAccessTokenAtom } from '@/state'
 
-import { parseUserData } from '../utils'
+import { GET_USER } from '@graphql'
+import { parseUserData } from '@utils'
 
 export function useUser() {
     const personalAccessToken = useAtomValue(personalAccessTokenAtom)

@@ -2,9 +2,9 @@ import { useApolloClient } from '@apollo/client'
 import { useMutation } from '@apollo/client'
 import { useAtomValue } from 'jotai'
 
-import { repoStoreAtom } from '../state'
+import { repoStoreAtom } from '@/state'
 
-import { GET_USER, GET_REPOSITORY_TREE, COMMIT } from '../graphql'
+import { GET_USER, GET_REPOSITORY_TREE, COMMIT } from '@graphql'
 
 export const useCommit = (text, commitMessage, oid) => {
     const client = useApolloClient()

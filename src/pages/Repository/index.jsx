@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 
 import { useAtomValue } from 'jotai'
-import { repoStoreAtom } from '../../state'
+import { repoStoreAtom } from '@/state'
 
-import { useRepoService } from '../../services/useRepoService'
+import { useRepoService } from '@services/useRepoService'
 
-import { useRepositoryTree, useFile } from '../../hooks'
+import { useRepositoryTree, useFile } from '@hooks'
 
-import { Heading } from '../../components'
+import { Heading } from '@components'
 import { Modal } from './Modal'
 import { FilesTable } from './FilesTable'
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { useUser } from '../hooks'
+import { useUser } from '@hooks'
 
 export function Header() {
     const { data: user } = useUser()

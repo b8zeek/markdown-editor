@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
-import { useRepositories } from '../hooks'
+import { useRepositories } from '@hooks'
 
-import { Heading } from '../components'
+import { Heading } from '@components'
 
 const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     return (

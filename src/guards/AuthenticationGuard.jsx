@@ -1,11 +1,11 @@
 import { useSetAtom } from 'jotai'
 import { useApolloClient } from '@apollo/client'
 
-import { personalAccessTokenAtom } from '../state'
+import { personalAccessTokenAtom } from '@/state'
 
-import { useUser } from '../hooks'
+import { useUser } from '@hooks'
 
-import { LoginPage } from '../pages'
+import { LoginPage } from '@pages'
 
 export function AuthenticationGuard({ children }) {
     const setPersonalAccessToken = useSetAtom(personalAccessTokenAtom)

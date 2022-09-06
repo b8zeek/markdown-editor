@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import folder from '../../assets/svgs/folder.svg'
-import file from '../../assets/svgs/file.svg'
+import folder from '@assets/svgs/folder.svg'
+import file from '@assets/svgs/file.svg'
 
 export const FilesTable = ({
     branchName,

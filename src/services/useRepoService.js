@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai'
-import { repoStoreAtom } from '../state'
+import { repoStoreAtom } from '@/state'
 
 export const useRepoService = () => {
     const { setCurrentPath, setSelectedFile } = useAtomValue(repoStoreAtom)

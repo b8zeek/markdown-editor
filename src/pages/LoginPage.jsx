@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-import { Button } from '../components'
+import { Button } from '@components'
 
 export function LoginPage({ addNewToken }) {
     const [newToken, enterNewToken] = useState('')
