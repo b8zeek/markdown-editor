@@ -21,11 +21,11 @@ export function Repository() {
     const params = useParams()
 
     useEffect(() => {
-        const [name, path] = params.repository.split('~')
+        const [name, branch] = params.repository.split('~')
 
         resetRepoState()
         setRepositoryName(name)
-        setBranchName(path)
+        setBranchName(branch)
     }, [])
 
     const { repositoryTree, oid } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
@@ -45,7 +45,9 @@ export function Repository() {
                     toTheRootFolder={toTheRootFolder}
                 />
             )}
-            {fileContent?.text && <Modal text={fileContent.text} closeFile={closeFile} />}
+            {fileContent?.text && (
+                <Modal text={fileContent.text} closeFile={closeFile} currentPath={currentPath} oid={oid} />
+            )}
         </Container>
     )
 }
