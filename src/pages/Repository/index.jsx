@@ -46,7 +46,13 @@ export function Repository() {
                 />
             )}
             {fileContent?.text && (
-                <Modal text={fileContent.text} closeFile={closeFile} currentPath={currentPath} oid={oid} />
+                <Modal
+                    text={fileContent.text}
+                    fileContent={fileContent}
+                    closeFile={closeFile}
+                    currentPath={currentPath}
+                    oid={oid}
+                />
             )}
         </Container>
     )
