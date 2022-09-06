@@ -29,7 +29,7 @@ export const Repositories = () => {
 
     return (
         <Container>
-            {repositories.length !== 0 ? (
+            {repositories.length !== 0 && (
                 <>
                     <Heading>Repositories</Heading>
                     <RepoContainer>
@@ -45,8 +45,6 @@ export const Repositories = () => {
                         ))}
                     </RepoContainer>
                 </>
-            ) : (
-                <p>Fetching...</p>
             )}
         </Container>
     )
