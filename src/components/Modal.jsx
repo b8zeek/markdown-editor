@@ -1,36 +1,17 @@
+import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
-import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
+
+import { useCommit } from '../hooks'
 
 import { Button } from './Button'
 
-import { COMMIT } from '../graphql'
-
-export function Modal({ text, closeFile, currentPath, oid }) {
+export function Modal({ text, closeFile, oid }) {
     const [modalContainer] = useState(() => document.createElement('div'))
     const [value, setValue] = useState('')
     const [commitMessage, setCommitMessage] = useState('')
 
-    console.log(oid)
-
-    const [commitChanges, { data }] = useMutation(COMMIT)
-
-    console.log('COMMIT DATA:', data)
-
-    const commitHandler = () => {
-        console.log('CLICK HANDLER EXECUTED')
-        commitChanges({
-            variables: {
-                ownerAndRepo: 'bejzik8/documents',
-                branchName: 'master',
-                message: commitMessage,
-                path: 'test.md',
-                content: btoa(value),
-                oid
-            }
-        })
-    }
+    const commitHandler = useCommit(value, commitMessage, oid)
 
     useEffect(() => {
         modalContainer.classList.add('modal-root')
