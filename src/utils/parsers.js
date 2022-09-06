@@ -1,4 +1,4 @@
-import { User, Repository, TreeEntry, File } from '../models'
+import { User, Repository, TreeEntry, File } from '@models'
 
 export function parseUserData(data) {
     return new User(data?.user)
