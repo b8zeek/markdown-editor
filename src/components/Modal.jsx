@@ -1,12 +1,36 @@
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
+import { useMutation } from '@apollo/client'
 
 import { Button } from './Button'
 
-export function Modal({ text, closeFile }) {
+import { COMMIT } from '../graphql'
+
+export function Modal({ text, closeFile, currentPath, oid }) {
     const [modalContainer] = useState(() => document.createElement('div'))
     const [value, setValue] = useState('')
+    const [commitMessage, setCommitMessage] = useState('')
+
+    console.log(oid)
+
+    const [commitChanges, { data }] = useMutation(COMMIT)
+
+    console.log('COMMIT DATA:', data)
+
+    const commitHandler = () => {
+        console.log('CLICK HANDLER EXECUTED')
+        commitChanges({
+            variables: {
+                ownerAndRepo: 'bejzik8/documents',
+                branchName: 'master',
+                message: commitMessage,
+                path: 'test.md',
+                content: btoa(value),
+                oid
+            }
+        })
+    }
 
     useEffect(() => {
         modalContainer.classList.add('modal-root')
@@ -20,6 +44,11 @@ export function Modal({ text, closeFile }) {
         }
     }, [])
 
+    const onChangeHandler = event => {
+        setValue(event.target.value)
+        console.log('BASE64:', btoa(event.target.value))
+    }
+
     const handleCloseFile = event => {
         if (event.target === event.currentTarget) closeFile()
     }
@@ -29,11 +58,15 @@ export function Modal({ text, closeFile }) {
             <Container>
                 <Title>markdown-editor.md</Title>
                 <MarkdownModal>
-                    <Textarea spellCheck={false} value={value} onChange={e => setValue(e.target.value)} />
+                    <Textarea spellCheck={false} value={value} onChange={onChangeHandler} />
                 </MarkdownModal>
                 <Footer>
-                    <Input placeholder='Commit message...' />
-                    <Button>Commit Changes</Button>
+                    <Input
+                        placeholder='Commit message...'
+                        value={commitMessage}
+                        onChange={e => setCommitMessage(e.target.value)}
+                    />
+                    <Button onClick={commitHandler}>Commit Changes</Button>
                 </Footer>
             </Container>
         </Backdrop>,
