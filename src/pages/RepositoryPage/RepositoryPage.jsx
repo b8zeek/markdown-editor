@@ -37,19 +37,18 @@ export function RepositoryPage() {
 
     return (
         <Container>
-            {repositoryName && <Heading>{repositoryName}</Heading>}
-            {repositoryTree.length !== 0 && (
-                <FilesTable
-                    branchName={branchName}
-                    currentPath={currentPath}
-                    repositoryTree={repositoryTree}
-                    openFileOrFolder={openFileOrFolder}
-                    toFolder={toFolder}
-                    folderUp={folderUp}
-                    toTheRootFolder={toTheRootFolder}
-                    loading={loading}
-                />
-            )}
+            <Heading>{repositoryName}</Heading>
+            <FilesTable
+                branchName={branchName}
+                currentPath={currentPath}
+                repositoryTree={repositoryTree}
+                openFileOrFolder={openFileOrFolder}
+                toFolder={toFolder}
+                folderUp={folderUp}
+                toTheRootFolder={toTheRootFolder}
+                loading={loading}
+            />
+
             {file?.text && <Modal fileContent={file.text} oid={oid} />}
         </Container>
     )
