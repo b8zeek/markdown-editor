@@ -57,7 +57,8 @@ const Paragraph = styled.p`
 const PreloaderText = styled.div`
     height: 12px;
     width: ${props => props.width || '60%'};
-    background-color: grey;
+    background: linear-gradient(90deg, rgba(100, 100, 100, 0.5), rgba(50, 50, 50, 0.1));
+    background-size: 200px 100px;
     border-radius: 4px;
     margin-top: 4px;
     ${({ marginBottom }) => marginBottom && 'margin-bottom: 12px;'}
