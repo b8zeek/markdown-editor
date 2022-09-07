@@ -4,13 +4,17 @@ import folder from '@assets/svgs/folder.svg'
 import file from '@assets/svgs/file.svg'
 
 export const FileItem = ({ entry, openFileOrFolder }) => (
-    <Container key={entry.id}>
+    <Container>
         <FileIcon src={entry.type === 'tree' ? folder : file} alt='123' />
         <FileText onClick={() => openFileOrFolder(entry.type, entry.path)}>{entry.name}</FileText>
     </Container>
 )
 
-export const PreloaderFileItem = () => {}
+export const PreloaderFileItem = () => (
+    <Container>
+        <PreloaderText />
+    </Container>
+)
 
 export const FolderUpItem = ({ folderUp }) => (
     <Container>
@@ -41,9 +45,9 @@ const FileText = styled.a`
 
 const PreloaderText = styled.div`
     height: 14px;
-    width: 30%;
+    width: 20%;
     background: linear-gradient(90deg, rgba(100, 100, 100, 0.5), rgba(50, 50, 50, 0.1));
-    background-size: 200px 100px;
+    background-size: 300px 100px;
     border-radius: 4px;
     margin: 4px 0 3px;
 `
