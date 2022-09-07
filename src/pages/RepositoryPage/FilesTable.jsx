@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { FileItem, FolderUpItem } from './FileItem'
+import { FileItem, PreloaderFileItem, FolderUpItem } from './FileItem'
 
 export const FilesTable = ({
     branchName,
@@ -9,7 +9,8 @@ export const FilesTable = ({
     openFileOrFolder,
     toFolder,
     folderUp,
-    toTheRootFolder
+    toTheRootFolder,
+    loading
 }) => (
     <FilesContainer>
         <FilesHeader>
@@ -35,10 +36,18 @@ export const FilesTable = ({
             </RepoHeading>
         </FilesHeader>
         <FilesBody>
-            {currentPath.length !== 0 && <FolderUpItem folderUp={folderUp} />}
-            {repositoryTree.map(entry => (
-                <FileItem key={entry.id} entry={entry} openFileOrFolder={openFileOrFolder} />
-            ))}
+            {loading ? (
+                Array(10)
+                    .fill()
+                    .map((_, index) => <PreloaderFileItem key={index} />)
+            ) : (
+                <>
+                    {currentPath.length !== 0 && <FolderUpItem folderUp={folderUp} />}
+                    {repositoryTree.map(entry => (
+                        <FileItem key={entry.id} entry={entry} openFileOrFolder={openFileOrFolder} />
+                    ))}
+                </>
+            )}
         </FilesBody>
     </FilesContainer>
 )
