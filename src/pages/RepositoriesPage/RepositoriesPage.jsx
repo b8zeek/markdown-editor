@@ -1,19 +1,18 @@
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
 
 import { useRepositories } from '@hooks'
+
+import { useRepositoriesService } from '@services'
 
 import { Heading } from '@components'
 import { RepoItem, PreloaderRepoItem } from './RepoItem'
 
 export function RepositoriesPage() {
-    const navigate = useNavigate()
+    const { selectRepo } = useRepositoriesService()
 
     const { data: repositories, loading } = useRepositories()
 
     console.log('REPOSITORIES:', repositories)
-
-    const selectRepo = repo => navigate(`/${repo.name}~${repo.defaultBranchRefName}`)
 
     return (
         <Container>
