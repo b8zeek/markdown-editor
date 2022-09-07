@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai'
 import { repoStoreAtom } from '@/state'
 
-export const useRepoService = () => {
+export function useRepositoryService() {
     const { setCurrentPath, setSelectedFile } = useAtomValue(repoStoreAtom)
 
     const openFileOrFolder = (type, path) => (type === 'tree' ? setCurrentPath(path.split('/')) : setSelectedFile(path))

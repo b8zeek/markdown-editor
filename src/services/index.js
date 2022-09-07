@@ -1,2 +1,3 @@
 export * from './useUIService'
-export * from './useRepoService'
+export * from './useRepositoriesService'
+export * from './useRepositoryService'

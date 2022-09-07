@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 
-import { useRepoService } from '@services/useRepoService'
+import { useRepositoryService } from '@services'
 
 import { useCommit } from '@hooks'
 
@@ -13,7 +13,7 @@ export function Modal({ fileContent, oid }) {
     const [value, setValue] = useState('')
     const [commitMessage, setCommitMessage] = useState('')
 
-    const { closeFile } = useRepoService()
+    const { closeFile } = useRepositoryService()
 
     const commitHandler = useCommit(value, commitMessage, oid)
 

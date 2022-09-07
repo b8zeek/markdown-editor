@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
 import { repoStoreAtom } from '@/state'
 
-import { useRepoService } from '@services/useRepoService'
+import { useRepositoryService } from '@services'
 
 import { useRepositoryTree, useFile } from '@hooks'
 
@@ -17,7 +17,7 @@ export function RepositoryPage() {
     const { repositoryName, setRepositoryName, branchName, setBranchName, currentPath, selectedFile, resetRepoState } =
         useAtomValue(repoStoreAtom)
 
-    const { openFileOrFolder, toFolder, folderUp, toTheRootFolder } = useRepoService()
+    const { openFileOrFolder, toFolder, folderUp, toTheRootFolder } = useRepositoryService()
 
     const params = useParams()
 

@@ -33,11 +33,6 @@ const RepoItemContainer = styled.div`
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.2);
     cursor: pointer;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-
     margin-bottom: 20px;
 
     &:hover {
