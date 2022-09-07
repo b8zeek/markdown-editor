@@ -29,7 +29,10 @@ export function RepositoryPage() {
         setBranchName(branch)
     }, [])
 
-    const { repositoryTree, oid } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
+    const {
+        data: { repositoryTree, oid },
+        loading
+    } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
     const file = useFile(repositoryName, `${branchName}:${selectedFile}`)
 
     return (
@@ -44,6 +47,7 @@ export function RepositoryPage() {
                     toFolder={toFolder}
                     folderUp={folderUp}
                     toTheRootFolder={toTheRootFolder}
+                    loading={loading}
                 />
             )}
             {file?.text && <Modal fileContent={file.text} oid={oid} />}
