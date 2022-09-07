@@ -2,6 +2,15 @@ import styled from 'styled-components'
 
 import { FileItem, PreloaderFileItem, FolderUpItem } from './FileItem'
 
+const PathFragment = ({ path, clickable, onClick }) => (
+    <PathFragmentContainer>
+        <FolderSpan clickable={clickable} onClick={onClick}>
+            {path}
+        </FolderSpan>
+        <SlashSpan>/</SlashSpan>
+    </PathFragmentContainer>
+)
+
 export const FilesTable = ({
     branchName,
     currentPath,
@@ -15,23 +24,18 @@ export const FilesTable = ({
     <FilesContainer>
         <FilesHeader>
             <RepoHeading>
-                <FolderSpan
+                <PathFragment
+                    path={branchName}
                     clickable={currentPath.length !== 0}
                     onClick={currentPath.length !== 0 ? toTheRootFolder : undefined}
-                >
-                    {branchName}
-                </FolderSpan>
-                <SlashSpan>/</SlashSpan>
+                />
                 {currentPath.map((folder, index) => (
-                    <>
-                        <FolderSpan
-                            clickable={currentPath.length > index + 1}
-                            onClick={currentPath.length > index + 1 ? toFolder.bind(null, index) : undefined}
-                        >
-                            {folder}
-                        </FolderSpan>
-                        <SlashSpan>/</SlashSpan>
-                    </>
+                    <PathFragment
+                        key={index}
+                        path={folder}
+                        clickable={currentPath.length > index + 1}
+                        onClick={currentPath.length > index + 1 ? toFolder.bind(null, index) : undefined}
+                    />
                 ))}
             </RepoHeading>
         </FilesHeader>
@@ -70,7 +74,10 @@ const FilesBody = styled.div`
     border-radius: 0 0 6px 6px;
 `
 
-const RepoHeading = styled.p`
+const RepoHeading = styled.div``
+
+const PathFragmentContainer = styled.p`
+    display: inline-block;
     line-height: 1.5;
     font-size: 14px;
     color: #c9d1d9;
