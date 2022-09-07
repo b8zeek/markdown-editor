@@ -12,6 +12,7 @@ export const FileItem = ({ entry, openFileOrFolder }) => (
 
 export const PreloaderFileItem = () => (
     <Container>
+        <PreloaderIcon />
         <PreloaderText />
     </Container>
 )
@@ -43,11 +44,20 @@ const FileText = styled.a`
     }
 `
 
+const PreloaderIcon = styled.div`
+    height: 16px;
+    width: 16px;
+    background: rgba(100, 100, 100, 0.5);
+    background-size: 100px 100px;
+    border-radius: 4px;
+    margin-right: 16px;
+`
+
 const PreloaderText = styled.div`
     height: 14px;
-    width: 20%;
+    width: 15%;
     background: linear-gradient(90deg, rgba(100, 100, 100, 0.5), rgba(50, 50, 50, 0.1));
-    background-size: 300px 100px;
+    background-size: 200px 100px;
     border-radius: 4px;
     margin: 4px 0 3px;
 `
