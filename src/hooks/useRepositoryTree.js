@@ -15,7 +15,8 @@ export function useRepositoryTree(name, path) {
             name,
             path
         },
-        skip: !name || !path
+        skip: !name || !path,
+        fetchPolicy: 'no-cache'
     })
 
     if (data) return { data: parseTreeData(data), loading }
