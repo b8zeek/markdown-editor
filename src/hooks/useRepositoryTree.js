@@ -1,15 +1,10 @@
-import { useEffect } from 'react'
 import { useApolloClient } from '@apollo/client'
 import { useQuery } from '@apollo/client/react/hooks'
 
 import { GET_USER, GET_REPOSITORY_TREE } from '@graphql'
 import { parseTreeData } from '@utils'
 
-import { useUIService } from '@services'
-
 export function useRepositoryTree(name, path) {
-    const { showSpinner, hideSpinner } = useUIService()
-
     const client = useApolloClient()
 
     const { user } = client.readQuery({ query: GET_USER })
@@ -23,11 +18,7 @@ export function useRepositoryTree(name, path) {
         skip: !name || !path
     })
 
-    useEffect(() => {
-        loading ? showSpinner() : hideSpinner()
-    }, [loading])
-
-    if (data) return parseTreeData(data)
-    if (previousData) return parseTreeData(previousData)
-    return { repositoryTree: [], oid: '' }
+    if (data) return { data: parseTreeData(data), loading }
+    if (previousData) return { data: parseTreeData(previousData), loading }
+    return { data: { repositoryTree: [], oid: '' }, loading }
 }
