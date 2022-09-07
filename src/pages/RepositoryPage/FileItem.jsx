@@ -1,16 +1,22 @@
+import styled from 'styled-components'
+
 import folder from '@assets/svgs/folder.svg'
 import file from '@assets/svgs/file.svg'
 
-export function FileItem({ entry, openFileOrFolder }) {
-    return (
-        <Container key={entry.id}>
-            <FileIcon src={entry.type === 'tree' ? folder : file} alt='123' />
-            <FileText onClick={() => openFileOrFolder(entry.type, entry.path)}>{entry.name}</FileText>
-        </Container>
-    )
-}
+export const FileItem = ({ entry, openFileOrFolder }) => (
+    <Container key={entry.id}>
+        <FileIcon src={entry.type === 'tree' ? folder : file} alt='123' />
+        <FileText onClick={() => openFileOrFolder(entry.type, entry.path)}>{entry.name}</FileText>
+    </Container>
+)
 
-export function PreloaderFileItem() {}
+export const PreloaderFileItem = () => {}
+
+export const FolderUpItem = ({ folderUp }) => (
+    <Container>
+        <FolderUp onClick={folderUp}>. .</FolderUp>
+    </Container>
+)
 
 const Container = styled.div`
     display: flex;
@@ -44,4 +50,14 @@ const PreloaderText = styled.div`
 
 const FileIcon = styled.img`
     margin-right: 16px;
+`
+
+const FolderUp = styled.a`
+    display: block;
+    width: 100%;
+    line-height: 1.5;
+    font-size: 14px;
+    font-weight: 600;
+    color: #58a6ff;
+    cursor: pointer;
 `
