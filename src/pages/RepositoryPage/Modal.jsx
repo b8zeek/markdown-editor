@@ -1,34 +1,43 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
+import { useAtomValue } from 'jotai'
+
+import { repoStoreAtom } from '@/state'
 
 import { useRepositoryService } from '@services'
 
-import { useCommit } from '@hooks'
+import { useFile, useCommit } from '@hooks'
 
 import { Button } from '@components/Button'
 
-export function Modal({ file, oid }) {
+export function Modal() {
     const [modalContainer] = useState(() => document.createElement('div'))
+
     const [value, setValue] = useState('')
     const [commitMessage, setCommitMessage] = useState('')
 
+    const { repositoryName, branchName, selectedFile } = useAtomValue(repoStoreAtom)
+
     const { closeFile } = useRepositoryService()
 
-    const commitHandler = useCommit(value, commitMessage, file.oid)
+    const file = useFile(repositoryName, branchName, selectedFile)
+    const commitHandler = useCommit(value, commitMessage, file?.oid)
 
     useEffect(() => {
         modalContainer.classList.add('modal-root')
         document.body.appendChild(modalContainer)
         document.body.style.overflow = 'hidden'
 
-        setValue(file.text)
-
         return () => {
             document.body.removeChild(modalContainer)
             document.body.style.overflow = 'auto'
         }
     }, [])
+
+    useEffect(() => {
+        if (file && !value) setValue(file.text)
+    }, [file])
 
     const onChangeHandler = event => setValue(event.target.value)
     const handleCloseFile = event => {
