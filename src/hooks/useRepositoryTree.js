@@ -19,7 +19,7 @@ export function useRepositoryTree(name, path) {
         fetchPolicy: 'no-cache'
     })
 
-    if (data) return { data: parseTreeData(data), loading }
-    if (previousData) return { data: parseTreeData(previousData), loading }
-    return { data: { repositoryTree: [], oid: '' }, loading }
+    if (data) return { repositoryTree: parseTreeData(data), loading }
+    if (previousData) return { repositoryTree: parseTreeData(previousData), loading }
+    return { repositoryTree: [], loading }
 }
