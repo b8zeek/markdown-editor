@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { Paragraph } from '@components'
+
 export const RepoItem = ({ name, url, createdAt, updatedAt, onClick }) => {
     return (
         <RepoItemContainer onClick={onClick}>
@@ -38,15 +40,6 @@ const RepoItemContainer = styled.div`
     &:hover {
         background-color: rgba(255, 255, 255, 0.1);
     }
-`
-
-const Paragraph = styled.p`
-    line-height: 16px;
-    font-size: 12px;
-    margin: 0;
-
-    ${({ bold }) => bold && 'font-weight: 800;'}
-    ${({ marginBottom }) => marginBottom && 'margin-bottom: 8px;'}
 `
 
 const PreloaderText = styled.div`
