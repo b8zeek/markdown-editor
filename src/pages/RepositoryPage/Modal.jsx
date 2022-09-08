@@ -21,7 +21,7 @@ export function Modal() {
 
     const { closeFile } = useRepositoryService()
 
-    const file = useFile(repositoryName, branchName, selectedFile)
+    const { file, loading } = useFile(repositoryName, branchName, selectedFile)
     const commitHandler = useCommit(value, commitMessage, file?.oid)
 
     useEffect(() => {
@@ -49,7 +49,22 @@ export function Modal() {
             <Container>
                 <Title>markdown-editor.md</Title>
                 <MarkdownModal>
-                    <Textarea spellCheck={false} value={value} onChange={onChangeHandler} />
+                    {loading ? (
+                        <TextAreaPreloaderContainer>
+                            <PreloaderText width={30} />
+                            <PreloaderText width={70} />
+                            <PreloaderText width={50} />
+                            <PreloaderText />
+                            <PreloaderText width={20} />
+                            <PreloaderText width={60} />
+                            <PreloaderText width={50} />
+                            <PreloaderText width={20} />
+                            <PreloaderText width={70} />
+                            <PreloaderText width={30} />
+                        </TextAreaPreloaderContainer>
+                    ) : (
+                        <Textarea spellCheck={false} value={value} onChange={onChangeHandler} />
+                    )}
                 </MarkdownModal>
                 <Footer>
                     <Input
@@ -112,6 +127,21 @@ const Textarea = styled.textarea`
     font-size: 14px;
     outline: none;
     resize: none;
+`
+
+const TextAreaPreloaderContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+`
+
+const PreloaderText = styled.div`
+    height: 14px;
+    width: ${({ width }) => width || 40}%;
+    background: linear-gradient(90deg, rgba(100, 100, 100, 0.5), rgba(50, 50, 50, 0.1));
+    background-size: 600px 100px;
+    border-radius: 4px;
+    margin: 3px 0 6px;
 `
 
 const Footer = styled.div`
