@@ -59,20 +59,6 @@ export const GET_REPOSITORY_TREE = gql`
                 }
             }
         }
-
-        oid: repository(owner: $owner, name: $name) {
-            defaultBranchRef {
-                target {
-                    ... on Commit {
-                        history(first: 1) {
-                            nodes {
-                                oid
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 `
 
