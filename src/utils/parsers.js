@@ -20,5 +20,5 @@ export function parseTreeData(data) {
 }
 
 export function parseFileData(data) {
-    return data ? new File(data.repository.object) : null
+    return data ? new File(data.repository) : null
 }
