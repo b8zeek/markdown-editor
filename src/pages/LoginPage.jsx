@@ -19,12 +19,12 @@ export function LoginPage({ addNewToken }) {
     return (
         <Container>
             <Form onSubmit={handleSubmit}>
-                <Heading marginBottom='12px' rainbow>
+                <Heading fontSize='32px' marginBottom='12px' rainbow>
                     Greetings Traveler!
                 </Heading>
                 <Paragraph textAlign='center'>
-                    In order to use the application, you'll gonna have to provide GitHub's access token which will be
-                    stored in the local storage. Sceptics, source code of the application is{' '}
+                    In order to use the application, you'll gonna have to provide GitHub's personal access token which
+                    will be stored in the local storage. Source code of the application is{' '}
                     <Span onClick={openSourceCode}>over here</Span>.
                 </Paragraph>
                 <Input value={newToken} onChange={event => enterNewToken(event.target.value)} />
