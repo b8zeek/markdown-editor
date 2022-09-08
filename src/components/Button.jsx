@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export const Button = ({ children, onClick }) => <StyledButton onClick={onClick}>{children}</StyledButton>
+export const Button = ({ children, onClick, disabled }) => (
+    <StyledButton onClick={onClick} disabled={disabled}>
+        {children}
+    </StyledButton>
+)
 
 const StyledButton = styled.button`
     line-height: 20px;
