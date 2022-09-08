@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client/react/hooks'
 import { GET_USER, GET_FILE } from '@graphql'
 import { parseFileData } from '@utils'
 
-export function useFile(name, path) {
+export function useFile(name, branchName, selectedFile) {
     const client = useApolloClient()
 
     const { user } = client.readQuery({ query: GET_USER })
@@ -13,9 +13,10 @@ export function useFile(name, path) {
         variables: {
             owner: user.login,
             name,
-            path
+            path: `${branchName}:${selectedFile}`
         },
-        skip: !name || !path
+        skip: !name || !branchName || !selectedFile,
+        fetchPolicy: 'no-cache'
     })
 
     return parseFileData(data)

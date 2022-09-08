@@ -33,7 +33,7 @@ export function RepositoryPage() {
         data: { repositoryTree, oid },
         loading
     } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
-    const file = useFile(repositoryName, `${branchName}:${selectedFile}`)
+    const file = useFile(repositoryName, branchName, selectedFile)
 
     return (
         <Container>
