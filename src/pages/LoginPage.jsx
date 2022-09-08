@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-import { Button } from '@components'
+import { Heading, Paragraph, Button } from '@components'
 
 export function LoginPage({ addNewToken }) {
     const [newToken, enterNewToken] = useState('')
@@ -12,9 +12,21 @@ export function LoginPage({ addNewToken }) {
         addNewToken(newToken)
     }
 
+    function openSourceCode() {
+        window.open('https://github.com/bejzik8/markdown-editor')
+    }
+
     return (
         <Container>
             <Form onSubmit={handleSubmit}>
+                <Heading marginBottom='12px' rainbow>
+                    Greetings Traveler!
+                </Heading>
+                <Paragraph textAlign='center'>
+                    In order to use the application, you'll gonna have to provide GitHub's access token which will be
+                    stored in the local storage. Sceptics, source code of the application is{' '}
+                    <Span onClick={openSourceCode}>over here</Span>.
+                </Paragraph>
                 <Input value={newToken} onChange={event => enterNewToken(event.target.value)} />
                 <Button type='submit' disabled={newToken.length === 0}>
                     Authenticate
@@ -34,6 +46,7 @@ const Container = styled.div`
 `
 
 const Form = styled.form`
+    width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,10 +62,15 @@ const Input = styled.input`
     background-color: #0d1117;
     border: 1px solid #30363d;
     border-radius: 6px;
-    margin-bottom: 10px;
+    margin: 30px 0 10px;
 
     &:focus {
         background-color: #161b22;
         outline: none;
     }
+`
+
+const Span = styled.span`
+    color: #58a6ff;
+    cursor: pointer;
 `
