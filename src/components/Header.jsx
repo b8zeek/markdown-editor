@@ -16,10 +16,10 @@ export function Header() {
                 </Navigation>
                 <UserData>
                     <UserInfo>
-                        <Paragraph bold marginBottom textAlignRight lineHeight='12px'>
+                        <Paragraph bold marginBottom textAlign='right' lineHeight='12px'>
                             {user.name}
                         </Paragraph>
-                        <Paragraph textAlignRight lineHeight='12px'>
+                        <Paragraph textAlign='right' lineHeight='12px'>
                             {user.bio}
                         </Paragraph>
                     </UserInfo>
