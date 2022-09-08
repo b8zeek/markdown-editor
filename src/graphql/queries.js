@@ -84,6 +84,17 @@ export const GET_FILE = gql`
                     text
                 }
             }
+            defaultBranchRef {
+                target {
+                    ... on Commit {
+                        history(first: 1) {
+                            nodes {
+                                oid
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 `
