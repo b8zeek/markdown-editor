@@ -9,7 +9,7 @@ export function useFile(name, branchName, selectedFile) {
 
     const { user } = client.readQuery({ query: GET_USER })
 
-    const { data } = useQuery(GET_FILE, {
+    const { data, loading } = useQuery(GET_FILE, {
         variables: {
             owner: user.login,
             name,
@@ -19,5 +19,5 @@ export function useFile(name, branchName, selectedFile) {
         fetchPolicy: 'no-cache'
     })
 
-    return parseFileData(data)
+    return { file: parseFileData(data), loading }
 }
