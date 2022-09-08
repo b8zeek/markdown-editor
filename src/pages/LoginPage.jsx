@@ -27,7 +27,7 @@ export function LoginPage({ addNewToken }) {
                     will be stored in the local storage. Source code of the application is{' '}
                     <Span onClick={openSourceCode}>over here</Span>.
                 </Paragraph>
-                <Input value={newToken} onChange={event => enterNewToken(event.target.value)} />
+                <Input value={newToken} onChange={event => enterNewToken(event.target.value)} spellCheck={false} />
                 <Button type='submit' disabled={newToken.length === 0}>
                     Authenticate
                 </Button>
