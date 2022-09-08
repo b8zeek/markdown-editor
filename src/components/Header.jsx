@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 import { useUser } from '@hooks'
 
+import { Paragraph } from './Paragraph'
+
 export function Header() {
     const { data: user } = useUser()
 
@@ -14,10 +16,12 @@ export function Header() {
                 </Navigation>
                 <UserData>
                     <UserInfo>
-                        <Paragraph bold marginBottom>
+                        <Paragraph bold marginBottom textAlignRight lineHeight='12px'>
                             {user.name}
                         </Paragraph>
-                        <Paragraph>{user.bio}</Paragraph>
+                        <Paragraph textAlignRight lineHeight='12px'>
+                            {user.bio}
+                        </Paragraph>
                     </UserInfo>
                     <UserImage src={user.avatarUrl} />
                 </UserData>
@@ -78,16 +82,6 @@ const UserInfo = styled.div`
     display: inline-block;
     vertical-align: top;
     margin-right: 20px;
-`
-
-const Paragraph = styled.p`
-    line-height: 12px;
-    font-size: 12px;
-    text-align: right;
-    margin: 0;
-
-    ${({ bold }) => bold && 'font-weight: 800;'}
-    ${({ marginBottom }) => marginBottom && 'margin-bottom: 8px;'}
 `
 
 const UserImage = styled.img`
