@@ -35,6 +35,8 @@ export function RepositoryPage() {
     } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
     const file = useFile(repositoryName, branchName, selectedFile)
 
+    console.log('FILE', file)
+
     return (
         <Container>
             <Heading>{repositoryName}</Heading>
@@ -49,7 +51,7 @@ export function RepositoryPage() {
                 loading={loading}
             />
 
-            {file?.text && <Modal fileContent={file.text} oid={oid} />}
+            {file?.text && <Modal file={file} oid={oid} />}
         </Container>
     )
 }
