@@ -4,16 +4,14 @@ import { useAtomValue } from 'jotai'
 
 import { repoStoreAtom } from '@/state'
 
-import { GET_USER, GET_REPOSITORY_TREE, COMMIT } from '@graphql'
+import { GET_USER, COMMIT } from '@graphql'
 
 export const useCommit = (text, commitMessage, oid) => {
     const client = useApolloClient()
 
-    const { repositoryName, branchName, currentPath, selectedFile } = useAtomValue(repoStoreAtom)
+    const { repositoryName, branchName, selectedFile } = useAtomValue(repoStoreAtom)
 
     const { user } = client.readQuery({ query: GET_USER })
-
-    // GET REPO OID
 
     const commitChanges = useMutation(COMMIT)[0]
 
@@ -24,13 +22,11 @@ export const useCommit = (text, commitMessage, oid) => {
                     ownerAndRepo: `${user.login}/${repositoryName}`,
                     branchName,
                     message: commitMessage,
-                    path: 'test.md',
+                    path: selectedFile,
                     content: btoa(text),
                     oid
                 }
             })
-
-            console.log('COMMIT DATA:', result)
         } catch (error) {
             console.error(error)
         }
