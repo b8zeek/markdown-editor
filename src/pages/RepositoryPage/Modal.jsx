@@ -71,8 +71,11 @@ export function Modal() {
                         placeholder='Commit message...'
                         value={commitMessage}
                         onChange={e => setCommitMessage(e.target.value)}
+                        spellCheck={false}
                     />
-                    <Button onClick={commitHandler}>Commit Changes</Button>
+                    <Button onClick={commitHandler} disabled={!value || !commitMessage}>
+                        Commit Changes
+                    </Button>
                 </Footer>
             </Container>
         </Backdrop>,
