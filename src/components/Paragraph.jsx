@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-export const Paragraph = ({ children, lineHeight, textAlignRight, bold, marginBottom }) => (
-    <StyledP lineHeight={lineHeight} textAlignRight={textAlignRight} bold={bold} marginBottom={marginBottom}>
+export const Paragraph = ({ children, lineHeight, textAlign, bold, marginBottom }) => (
+    <StyledP lineHeight={lineHeight} textAlign={textAlign} bold={bold} marginBottom={marginBottom}>
         {children}
     </StyledP>
 )
@@ -12,7 +12,7 @@ const StyledP = styled.p`
     margin: 0;
 
     ${({ lineHeight }) => lineHeight && `line-height: ${lineHeight};`}
-    ${({ textAlignRight }) => textAlignRight && 'text-align: right;'}
+    ${({ textAlign }) => textAlign && `text-align: ${textAlign};`}
     ${({ bold }) => bold && 'font-weight: 800;'}
     ${({ marginBottom }) => marginBottom && 'margin-bottom: 8px;'}
 `
