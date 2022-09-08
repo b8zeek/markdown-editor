@@ -7,7 +7,7 @@ import { repoStoreAtom } from '@/state'
 
 import { useRepositoryService } from '@services'
 
-import { useRepositoryTree, useFile } from '@hooks'
+import { useRepositoryTree } from '@hooks'
 
 import { Heading } from '@components'
 import { Modal } from './Modal'
@@ -33,9 +33,8 @@ export function RepositoryPage() {
         data: { repositoryTree, oid },
         loading
     } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
-    const file = useFile(repositoryName, branchName, selectedFile)
 
-    console.log('FILE', file)
+    console.log('SELECTED FILE', selectedFile)
 
     return (
         <Container>
@@ -50,8 +49,7 @@ export function RepositoryPage() {
                 toTheRootFolder={toTheRootFolder}
                 loading={loading}
             />
-
-            {file?.text && <Modal file={file} oid={oid} />}
+            {selectedFile && <Modal />}
         </Container>
     )
 }
