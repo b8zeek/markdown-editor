@@ -8,21 +8,21 @@ import { useCommit } from '@hooks'
 
 import { Button } from '@components/Button'
 
-export function Modal({ fileContent, oid }) {
+export function Modal({ file, oid }) {
     const [modalContainer] = useState(() => document.createElement('div'))
     const [value, setValue] = useState('')
     const [commitMessage, setCommitMessage] = useState('')
 
     const { closeFile } = useRepositoryService()
 
-    const commitHandler = useCommit(value, commitMessage, oid)
+    const commitHandler = useCommit(value, commitMessage, file.oid)
 
     useEffect(() => {
         modalContainer.classList.add('modal-root')
         document.body.appendChild(modalContainer)
         document.body.style.overflow = 'hidden'
 
-        setValue(fileContent)
+        setValue(file.text)
 
         return () => {
             document.body.removeChild(modalContainer)
