@@ -4,6 +4,9 @@ import { useAtomValue } from 'jotai'
 
 import { repoStoreAtom } from '@/state'
 
+import { useUIService } from '@services'
+import { useRepositoryService } from '@services'
+
 import { GET_USER, COMMIT } from '@graphql'
 
 export const useCommit = (text, commitMessage, oid) => {
@@ -11,13 +14,18 @@ export const useCommit = (text, commitMessage, oid) => {
 
     const { repositoryName, branchName, selectedFile } = useAtomValue(repoStoreAtom)
 
+    const { showSpinner, hideSpinner } = useUIService()
+    const { closeFile } = useRepositoryService()
+
     const { user } = client.readQuery({ query: GET_USER })
 
     const commitChanges = useMutation(COMMIT)[0]
 
     const commitHandler = async () => {
+        showSpinner()
+
         try {
-            const result = await commitChanges({
+            await commitChanges({
                 variables: {
                     ownerAndRepo: `${user.login}/${repositoryName}`,
                     branchName,
@@ -29,6 +37,9 @@ export const useCommit = (text, commitMessage, oid) => {
             })
         } catch (error) {
             console.error(error)
+        } finally {
+            closeFile()
+            hideSpinner()
         }
     }
 
