@@ -29,12 +29,7 @@ export function RepositoryPage() {
         setBranchName(branch)
     }, [])
 
-    const {
-        data: { repositoryTree, oid },
-        loading
-    } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
-
-    console.log('SELECTED FILE', selectedFile)
+    const { repositoryTree, loading } = useRepositoryTree(repositoryName, `${branchName}:${currentPath.join('/')}`)
 
     return (
         <Container>

@@ -12,8 +12,6 @@ export function RepositoriesPage() {
 
     const { data: repositories, loading } = useRepositories()
 
-    console.log('REPOSITORIES:', repositories)
-
     return (
         <Container>
             <Heading>Repositories</Heading>
