@@ -9,8 +9,12 @@ export function parseRepositoriesData(data) {
 }
 
 export function parseTreeData(data) {
+    const entries = data.repository.object.entries.map(entry => new TreeEntry(entry))
+    const trees = entries.filter(entrie => entrie.type === 'tree')
+    const blobs = entries.filter(entrie => entrie.type === 'blob')
+
     return {
-        repositoryTree: data.repository.object.entries.map(entry => new TreeEntry(entry)),
+        repositoryTree: [...trees, ...blobs],
         oid: data.oid.defaultBranchRef.target.history.nodes[0].oid
     }
 }
