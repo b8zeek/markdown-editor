@@ -1,18 +1,19 @@
 import styled from 'styled-components'
 
-export const Heading = ({ children, marginBottom, rainbow }) => (
-    <StyledH1 marginBottom={marginBottom} rainbow={rainbow}>
+export const Heading = ({ children, fontSize, marginBottom, rainbow }) => (
+    <StyledH1 fontSize={fontSize} marginBottom={marginBottom} rainbow={rainbow}>
         {children}
     </StyledH1>
 )
 
 const StyledH1 = styled.h1`
-    line-height: 32px;
+    line-height: 1.5;
     font-size: 24px;
     font-family: AllianceNo2, sans-serif;
     font-weight: 800;
     margin: 0 0 24px;
 
+    ${({ fontSize }) => fontSize && `font-size: ${fontSize};`}
     ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom};`}
     ${({ rainbow }) =>
         rainbow &&
