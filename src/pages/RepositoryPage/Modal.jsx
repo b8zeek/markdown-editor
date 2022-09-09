@@ -47,7 +47,7 @@ export function Modal() {
     return createPortal(
         <Backdrop onClick={handleCloseFile}>
             <Container>
-                <Title>markdown-editor.md</Title>
+                <Title>{selectedFile}</Title>
                 <MarkdownModal>
                     {loading ? (
                         <TextAreaPreloaderContainer>
