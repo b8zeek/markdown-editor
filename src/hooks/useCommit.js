@@ -1,6 +1,7 @@
 import { useApolloClient } from '@apollo/client'
 import { useMutation } from '@apollo/client'
 import { useAtomValue } from 'jotai'
+import { encode } from 'js-base64'
 
 import { repoStoreAtom } from '@/state'
 
@@ -31,7 +32,7 @@ export const useCommit = (text, commitMessage, oid) => {
                     branchName,
                     message: commitMessage,
                     path: selectedFile,
-                    content: btoa(text),
+                    content: encode(text),
                     oid
                 }
             })
