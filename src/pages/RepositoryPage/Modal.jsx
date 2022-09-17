@@ -92,8 +92,10 @@ const Container = styled.div`
 const Title = styled.h1`
     line-height: 28px;
     font-size: 16px;
+    font-family: AllianceNo2, sans-serif;
+    font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #21262d;
     border-radius: 6px;
     padding: 0 20px;
     margin: 0 0 16px;
@@ -104,7 +106,7 @@ const MarkdownModal = styled.div`
     height: 60vh;
     width: calc(100% - 40px);
     border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #21262d;
     backdrop-filter: blur(5px);
     padding: 20px;
 `
@@ -166,7 +168,7 @@ const Input = styled.input`
     font-family: JetBrainsMono;
     font-size: 14px;
     outline: none;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #21262d;
     padding: 4px 20px;
     margin-right: 15px;
 `
