@@ -10,6 +10,9 @@ const StyledP = styled.p`
     line-height: 16px;
     font-size: 12px;
     color: #c9d1d9;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     margin: 0;
 
     ${({ lineHeight }) => lineHeight && `line-height: ${lineHeight};`}
