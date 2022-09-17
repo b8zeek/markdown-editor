@@ -9,6 +9,7 @@ export const Paragraph = ({ children, lineHeight, textAlign, bold, marginBottom 
 const StyledP = styled.p`
     line-height: 16px;
     font-size: 12px;
+    color: #c9d1d9;
     margin: 0;
 
     ${({ lineHeight }) => lineHeight && `line-height: ${lineHeight};`}
