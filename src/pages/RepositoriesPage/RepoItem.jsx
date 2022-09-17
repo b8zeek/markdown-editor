@@ -31,14 +31,14 @@ const RepoItemContainer = styled.div`
     vertical-align: top;
     width: 20%;
     padding: 20px;
-    border: 1px solid #d0d7de;
+    border: 1px solid #21262d;
     border-radius: 6px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #0d1117;
     cursor: pointer;
     margin-bottom: 20px;
 
     &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: #131821;
     }
 `
 
